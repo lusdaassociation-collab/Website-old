@@ -3,7 +3,7 @@ import tailwind from "@astrojs/tailwind";
 import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
-  output: "hybrid",
+  output: "static",
   adapter: cloudflare({
     platformProxy: {
       enabled: true
