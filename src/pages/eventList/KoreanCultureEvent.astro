@@ -1,0 +1,119 @@
+---
+import TopBlueHeader from "../../components/TopBlueHeader.astro";
+import SiteFooter from "../../components/Footer.astro";
+const {
+  backHref = "/events",
+  backLabel = "Back to All Events",
+  title = "VISIT TO THE KOREAN CULTURAL INSTITUTE",
+  date = "Wednesday, April 9, 2025",
+  time = "10:30 AM – 1:00 PM",
+  body = [
+    "On April 9th, a delegation from LUSDA had the privilege of visiting the Korean Cultural Institute in Rome for a cultural immersion experience that proved both insightful and enriching.",
+    "The visit featured the exhibition \"Fiabe Occidentali in Hanbok\", which showcased a captivating collection of illustrations by renowned Korean artist Wooh Nayoung. The exhibit reimagined iconic Western fairytales through the aesthetic lens of traditional Korean clothing, known as hanbok, offering a fascinating fusion of cultural storytelling and artistic expression.",
+    "Following the exhibition, participants engaged in the traditional Korean game Tuho, gaining a hands-on appreciation of Korean customs and heritage. The experience concluded with a comprehensive presentation on South Korea, deepening our understanding of its history, culture, and global presence.",
+    "We would like to extend our sincere gratitude to the Korean Cultural Institute for their warm hospitality and for providing such a valuable opportunity to explore Korean culture. Initiatives like this continue to support LUSDA’s mission of promoting cross-cultural dialogue and global awareness among students."
+  ]
+} = Astro.props;
+export const prerender = true;
+---
+
+
+<TopBlueHeader
+  logoSrc="/Pictures/Logo.png"
+  sticky={false}
+/>
+    <body class="page">
+    <main class="wrap" aria-labelledby="event-title">
+      <a class="back" href={backHref}>← {backLabel}</a>
+
+      <h1 id="event-title" class="title">{title}</h1>
+
+      <div class="meta">
+        <p class="date">{date}</p>
+        <p class="time">{time}</p>
+      </div>
+
+      <section class="body">
+        {body.map((p) => <p class="para">{p}</p>)}
+      </section>
+    </main>
+  </body>
+</html>
+
+<style>
+  :root {
+    --bg: #0f2a40;
+    --fg: #1F3454;
+    --fg-dim: #1F3454;
+    --fg-strong: #1F3454;
+    --accent: #1F3454;
+    --maxw: 1200px;
+    --pad-x: clamp(16px, 4vw, 48px);
+    --pad-y: clamp(20px, 4vw, 40px);
+  }
+
+  .page {
+    margin: 0;
+    min-height: 100vh;
+    background: #1F3454;
+    color: #1F3454;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue",
+      Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  }
+
+  .wrap {
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding: var(--pad-y) var(--pad-x);
+  }
+
+  .back {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: var(--fg-dim);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .back:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .title {
+    margin: 0 0 1rem;
+    color: var(--fg-strong);
+    font-size: clamp(28px, 3.6vw, 44px);
+    font-weight: 800;
+    line-height: 1.15;
+  }
+
+  .meta {
+    margin-bottom: 2rem;
+  }
+  .date,
+  .time {
+    margin: 0;
+    color: var(--fg-dim);
+    font-size: clamp(14px, 1.6vw, 18px);
+    font-weight: 600;
+  }
+
+  .body {
+
+  }
+
+  .para {
+    margin: 0 0 1.5rem;
+    line-height: 1.8;
+    font-size: clamp(16px, 1.7vw, 18px);
+    color: var(--fg);
+  }
+</style>
+<SiteFooter
+  joinHref="/member"
+  location="Rome, RM, Italy"
+  email="lusdaassociation@gmail.com"
+  linkedin="https://www.linkedin.com/your-page"
+  instagram="https://instagram.com/your-page"
+/>
+</html>

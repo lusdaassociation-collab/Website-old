@@ -1,0 +1,103 @@
+---
+import TopBlueHeader from "../components/TopBlueHeader.astro";
+import SiteFooter from "../components/Footer.astro";
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LUSDA - Social Events</title>
+  <link rel="icon" type="image/png" href="/Pictures/favicon.png">
+</head>
+<body>
+  <TopBlueHeader
+    logoSrc="/Pictures/Logo.png"
+    sticky={false}
+  />
+
+  <main>
+    <section class="social-hero" style="--img:url('/Pictures/socialeventheader.png')">
+      <div class="social-hero__vignette" aria-hidden="true"></div>
+      <div class="social-hero__center">
+        <div class="social-hero__panel">
+          <h1 class="social-hero__title">SOCIAL EVENTS</h1>
+        </div>
+      </div>
+    </section>
+
+    <section class="informal-network">
+      <div class="in-wrap">
+        <h2 class="in-title">
+          <span>INFORMAL EVENTS TO</span><br>
+          <span>NETWORK:</span>
+        </h2>
+        <div class="in-copy">
+          <p>
+            Through our <strong>networking events</strong>, we bring together
+            <strong>students, professionals, and experts</strong> in a relaxed and informal
+            setting, fostering meaningful connections over
+            <strong>aperitivos and casual meet-ups</strong>. These gatherings offer a unique
+            opportunity to exchange ideas, discuss global affairs, and build relationships
+            in a friendly, approachable atmosphere. Whether you're looking to expand your
+            professional network or simply engage in thought-provoking conversations, our
+            events provide the perfect space to connect with like-minded individuals who
+            share an interest in <strong>diplomacy and international relations</strong>.
+          </p>
+          <p class="in-cta">
+            Join us for a drink, great company, and inspiring discussions!
+          </p>
+        </div>
+      </div>
+      <svg class="in-curve" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,0H1440V72C1060,118 420,118 0,104Z"></path>
+      </svg>
+    </section>
+
+    <section class="photo-grid">
+      <div class="photo-grid__wrap">
+        <a class="pg-item" href="#"><img src="/Pictures/social1.png" alt="Event photo 1"></a>
+        <a class="pg-item" href="#"><img src="/Pictures/social2.png" alt="Event photo 2"></a>
+        <a class="pg-item" href="#"><img src="/Pictures/social3.png" alt="Event photo 3"></a>
+        <a class="pg-item" href="#"><img src="/Pictures/social4.png" alt="Event photo 4"></a>
+        <a class="pg-item" href="#"><img src="/Pictures/social5.png" alt="Event photo 5"></a>
+        <a class="pg-item" href="#"><img src="/Pictures/social6.png" alt="Event photo 6"></a>
+        <a class="pg-item" href="#"><img src="/Pictures/social7.png" alt="Event photo 7"></a>
+        <a class="pg-item" href="#"><img src="/Pictures/social8.png" alt="Event photo 8"></a>
+        <a class="pg-item" href="#"><img src="/Pictures/social9.jpeg" alt="Event photo 9"></a>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter
+    joinHref="/member"
+    location="Rome, RM, Italy"
+    email="lusdaassociation@gmail.com"
+  />
+</body>
+</html>
+<style>
+  :root { --page-bg: #f1ede7; }
+  .social-hero{position: relative;width: 100%;height: clamp(360px, 48vw, 560px);background-image: var(--img);background-size: cover;background-position: center;background-repeat: no-repeat;overflow: hidden;}
+  .social-hero__vignette{position:absolute; inset:0;background:linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.28));pointer-events:none;}
+  .social-hero__center{position:absolute; inset:0;display:grid; place-items:center;padding: 0 16px;}
+  .social-hero__panel{padding: 14px 28px;border-radius: 14px;background: rgba(0,0,0,.45);-webkit-backdrop-filter: blur(6px);backdrop-filter: blur(6px);box-shadow: 0 12px 28px rgba(0,0,0,.35);}
+  .social-hero__title{margin:0;color:#fff;text-transform: uppercase;font-weight: 800;letter-spacing:.02em;font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-size: clamp(1.8rem, 5vw, 3.5rem);text-shadow: 0 10px 24px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.35);white-space: nowrap;}
+  @media (max-width: 520px){.social-hero__panel{ padding: 10px 18px; }.social-hero__title{ white-space: normal; text-align:center; }}
+  .informal-network{position: relative;background: #000;color: #fff;overflow: hidden;}
+  .in-wrap{max-width: 1380px;margin: 0 auto;padding: 8.5rem 3rem 10rem;display: grid;grid-template-columns: 1fr 1.05fr;gap: clamp(3rem, 7vw, 8rem);align-items: center;}
+  .in-title{margin: 0;text-transform: uppercase;font-weight: 900;line-height: .9;letter-spacing: .5px;font-size: clamp(2.6rem, 7.2vw, 6.25rem);}
+  .in-copy{max-width: 720px;color: #d6d6d6;font-size: clamp(1rem, .75vw + .9rem, 1.15rem);line-height: 1.85;}
+  .in-copy strong{color: #fff;font-weight: 800;}
+  .in-copy .in-cta{margin-top: 1rem;color: #fff;font-weight: 600;}
+  .in-curve{position: absolute;left: 0; right: 0; bottom: -1px;width: 100%;height: 120px;display: block;}
+  .in-curve path{ fill: var(--page-bg); }
+  @media (max-width: 1100px){.in-wrap{grid-template-columns: 1fr;padding: 6rem 1.25rem 7.5rem;}.in-title{ font-size: clamp(2.2rem, 10vw, 4.2rem); }}
+  .photo-grid{background: var(--page-bg);}
+  .photo-grid__wrap{max-width: 1380px;margin: 0 auto;padding: 3.5rem 1.5rem;display: grid;grid-template-columns: repeat(3, minmax(0, 1fr));gap: clamp(18px, 2.5vw, 40px);}
+  .pg-item{position: relative;display: block;overflow: hidden;background: #e9e9e9;}
+  .pg-item img{width: 100%;height: 100%;display: block;aspect-ratio: 4 / 3;object-fit: cover;transition: transform .35s ease;}
+  .pg-item:hover img{transform: scale(1.02);}
+  @media (max-width: 1100px){.photo-grid__wrap{ grid-template-columns: repeat(2, minmax(0, 1fr)); }}
+  @media (max-width: 640px){.photo-grid__wrap{ grid-template-columns: 1fr; }}
+</style>

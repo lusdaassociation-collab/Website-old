@@ -1,0 +1,60 @@
+---
+import TopBlueHeader from "../components/TopBlueHeader.astro";
+import SiteFooter from "../components/Footer.astro";
+---
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  .thankyou-main-content {
+    flex-grow: 1;
+  }
+</style>
+
+<TopBlueHeader
+  logoSrc="/Pictures/Logo.png"
+  sticky={false}
+/>
+<main class="thankyou-main-content">
+<div class="about-wrapper" style="max-width: 1200px; margin: 80px auto; padding: 0 20px; display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap;">
+  <div style="flex: 1 1 500px;">
+    <h2 style="
+      font-family: 'Playfair Display', serif;
+      color: #253551;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    ">
+      Success!
+    </h2>
+    <p style="font-family: 'Montserrat', sans-serif; color: #444; font-size: 1rem; line-height: 1.7; margin-bottom: 1.5rem;">
+      Thank you for your interest, we will process your request and contact you. In the meantime, consider joining the general LUSDA groupchat.
+    </p>
+        <a href="https://chat.whatsapp.com/IcUgadpEaXxL07i0TM4ZV9" style="
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #25D366;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 8px;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    ">
+      Join us on WhatsApp!
+    </a>
+
+  </div>
+</div>
+</main>
+
+<SiteFooter
+  joinHref="/member"
+  location="Rome, RM, Italy"
+  email="lusdaassociation@gmail.com"
+/>

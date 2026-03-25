@@ -1,0 +1,135 @@
+---
+import TopBlueHeader from "../components/TopBlueHeader.astro";
+import SiteFooter from "../components/Footer.astro";
+
+export const prerender = true;
+
+const SHEET_ID = '1N3mrF58xqUCMS6gKapDJUVkVI5p2iE6nzCGybS3jrUk'; 
+const TAB_NAME = 'staff'; 
+
+const response = await fetch(`https://opensheet.elk.sh/${SHEET_ID}/${TAB_NAME}`);
+const data = await response.json();
+
+// Safety check: ensure 'members' is always an array
+const members = Array.isArray(data) ? data : []; 
+
+const isCoPres = (r) => (r || "").toLowerCase().includes("co-president");
+
+// Now filter will only run if members is a valid array
+const presidents = members.filter((m) => isCoPres(m.role)); 
+const others     = members.filter((m) => !isCoPres(m.role)); 
+---
+
+<TopBlueHeader
+  logoSrc="/Pictures/Logo.png"
+  sticky={false}
+/>
+<title> LUSDA - Staff Board </title>
+<section class="team-blue">
+  <div class="team-section">
+    <h1 class="page-title text-center">Meet The 2024&ndash;2025 Team</h1>
+
+    <div class="presidents-grid">
+      {presidents.map((m) => (
+        <article class="president-card">
+          <div class="avatar avatar-xl">
+            <img src={m.img} alt={m.name}/>
+          </div>
+          <h3 class="president-name">{m.name}</h3>
+          <p class="president-role">{m.role}</p>
+          <a
+            href={m.link}
+            class="btn btn-light"
+            aria-disabled={!m.link}
+            tabindex={m.link ? 0 : -1}
+          >
+            Read Bio
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="team-grid">
+      {others.map((m) => (
+        <article class="team-member">
+          <div class="avatar">
+            <img src={m.img} alt={m.name}/>
+          </div>
+          <h3>{m.name}</h3>
+          <p class="role">{m.role}</p>
+          <a
+            href={m.link || "#"}
+            class="btn btn-light"
+            aria-disabled={!m.link}
+            tabindex={m.link ? 0 : -1}
+          >
+            Read Bio
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="legacy-cta">
+  <div class="legacy-wrap">
+    <h2>OUR LEGACY: FOUNDERS & PAST PRESIDENTS</h2>
+    <a href="/legacy" class="legacy-btn">LEARN MORE</a>
+  </div>
+</section>
+
+<section class="journey-cta" style={`--bg:url('/Pictures/mapteam.jpg')`}>
+  <div class="journey-inner">
+    <div class="journey-glass">
+      <h2>EMBARK ON YOUR JOURNEY IN INTERNATIONAL RELATIONS</h2>
+    </div>
+    <a href="/join" class="journey-btn">JOIN US</a>
+  </div>
+</section>
+
+<SiteFooter
+  joinHref="/member"
+  location="Rome, RM, Italy"
+  email="lusdaassociation@gmail.com"
+/>
+
+<style>
+  :root { --avatar-size:168px; }
+  .team-blue { background:#1f3147; padding:3rem 1rem; }
+  .team-section { max-width:1200px; margin:0 auto; color:#F4F0EC; }
+  .page-title { margin:0 0 2rem; font-family:"Libre Baskerville",serif; font-weight:700; font-size:clamp(1.4rem,2.8vw,2rem); text-transform:uppercase; letter-spacing:.04em; }
+  .presidents-grid { display:grid; grid-template-columns:1fr; gap:2.5rem; align-items:start; justify-items:center; margin-bottom:2rem; }
+  @media (min-width:900px) { .presidents-grid { grid-template-columns:repeat(2, minmax(0, 1fr)); gap:3rem; } }
+  .avatar { width:var(--avatar-size); height:var(--avatar-size); margin:.5rem auto .75rem; border-radius:9999px; overflow:hidden; background:#F4F0EC; }
+  .avatar img { width:100%; height:100%; object-fit:cover; display:block; border-radius:9999px; }
+  .avatar-xl { width:clamp(220px, 38vw, 520px); height:clamp(220px, 38vw, 520px); }
+  .president-card { text-align:center; }
+  .president-name { margin-top:1.1rem; font-family:"Libre Baskerville",serif; font-size:clamp(1.1rem,1.8vw,1.25rem); text-transform:uppercase; letter-spacing:.03em; }
+  .president-role { font-family:"Inter",system-ui,sans-serif; font-size:.85rem; opacity:.9; margin:.15rem 0 1.1rem; text-transform:uppercase; letter-spacing:.06em; }
+  .divider { height:1px; background:rgba(244,240,236,.25); margin:1.5rem auto 2rem; width:min(92%, 1100px); }
+  .team-grid { display:grid; grid-template-columns:repeat(1,minmax(0,1fr)); gap:1.75rem; }
+  @media (min-width:640px) { .team-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  @media (min-width:1024px) { .team-grid { grid-template-columns:repeat(4,minmax(0,1fr)); } }
+  .team-member { text-align:center; color:#F4F0EC; padding:.25rem; }
+  .team-member h3 { margin-top:.75rem; font-family:"Libre Baskerville",serif; text-transform:uppercase; font-size:1.06rem; }
+  .team-member .role { font-family:"Inter",system-ui,sans-serif; color:#E9E5DF; margin:.25rem 0 .9rem; font-size:.95rem; }
+  .legacy-cta { background:#F4F0EC; color:#0f3554; padding: clamp(5rem, 12vw, 12rem) 1rem; border-top: 1px solid rgba(15,53,84,.12); }
+  .legacy-wrap { max-width: 1200px; margin: 0 auto; text-align: center; }
+  .legacy-cta h2 { font-family: "Libre Baskerville", serif; font-weight: 500; text-transform: uppercase; letter-spacing: -1px; font-size: clamp(1.6rem, 3.4vw, 3rem); margin: 0 0 2rem; }
+  .legacy-btn { display:inline-flex; align-items:center; justify-content:center; min-width: clamp(220px, 28vw, 380px); height: 64px; padding: 0 24px; border-radius: 12px; text-transform: uppercase; letter-spacing: .08em; font-family: "Playfair Display", serif; background:#0f3554; color:#F4F0EC; border:1px solid #0f3554; box-shadow: 2px 2px 0 0 rgba(15,53,84,.35); transition: background .15s ease, color .15s ease, transform .05s ease, box-shadow .15s ease; }
+  .legacy-btn:hover { background:#173b5f; box-shadow: 2px 2px 0 0 rgba(15,53,84,.45); }
+  .legacy-btn:active { transform: translateY(1px); }
+  .btn { display:inline-flex; align-items:center; justify-content:center; height:44px; padding:0 18px; border-radius:12px; text-transform:uppercase; letter-spacing:.08em; font-family:"Playfair Display",serif; border:1px solid #F4F0EC; color:#1f3147; background:#F4F0EC; cursor:pointer; transition:background .15s,color .15s,border-color .15s,transform .05s; }
+  .btn:hover { background:#2563eb; color:#fff; border-color:#2563eb; }
+  .btn:active { transform:translateY(1px); }
+  .journey-cta { position: relative; min-height: clamp(420px, 62vh, 780px); background-image: var(--bg); background-size: cover; background-position: center; background-repeat: no-repeat; }
+  .journey-cta::after { content:""; position:absolute; inset:0; background: rgba(0,0,0,.08); pointer-events:none; }
+  .journey-inner { justify-items: center; position: relative; z-index: 1; height: 100%; width: min(1400px, 96%); margin: 0 auto; display: grid; place-content: center; gap: 1.5rem; text-align: center; padding: 1rem 0; }
+  .journey-glass { margin-inline: auto; width: min(1200px, 92%); padding: clamp(14px, 2.4vw, 28px) clamp(16px, 3vw, 40px); background: rgba(244, 240, 236, .65); backdrop-filter: blur(10px) saturate(105%); -webkit-backdrop-filter: blur(10px) saturate(105%); border-radius: 8px; }
+  .journey-glass h2 { margin: 0; color: #16324c; font-family: "Libre Baskerville", serif; text-transform: uppercase; letter-spacing: .02em; font-weight: 800; font-size: clamp(1.4rem, 4.4vw, 3.2rem); }
+  .journey-btn { display: inline-flex; align-items: center; justify-content: center; width: 128px; height: 60px; padding: 0 28px; border-radius: 6px; background: #F4F0EC; color: #0f3554; border: 1px solid #0f3554; box-shadow: 2px 2px 0 0 rgba(15,53,84,.35); text-transform: uppercase; letter-spacing: .08em; font-family: "Playfair Display", serif; transition: background .15s ease, color .15s ease, box-shadow .15s ease, transform .05s ease; }
+  .journey-btn:hover { background: #0f3554; color: #fff; box-shadow: 2px 2px 0 0 rgba(15,53,84,.45); }
+  .journey-btn:active { transform: translateY(1px); }
+</style>

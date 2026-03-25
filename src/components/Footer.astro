@@ -1,0 +1,76 @@
+---
+const {
+  org = "LUSDA - STUDENTS DIPLOMATIC ASSOCIATION",
+  joinHref = "/join",
+  location = "Rome, RM, Italy",
+  email = "lusdaassociation@gmail.com",
+  linkedin = "https://www.linkedin.com/company/lusda",
+  instagram = "https://instagram.com/lusdaluiss",
+} = Astro.props;
+---
+<footer class="bg-[#F4F0EC] text-[#0f3554] border-t border-[#0f3554]/15 mt-0 pt-10">
+  <div class="mx-auto max-w-[1200px] px-4 py-10 md:py-12 grid gap-10 md:grid-cols-3 items-start">
+
+    <div>
+      <h4 class="uppercase tracking-[.06em] text-[clamp(1.05rem,2vw,0.8rem)] font-medium"
+          style="font-family:'Libre Baskerville',serif;">
+        {org}
+      </h4>
+
+      <div class="mt-6 flex items-center gap-6">
+        <a
+          href={joinHref}
+          class="inline-flex items-center justify-center
+                 w-[160px] h-[40px] rounded-[12px]
+                 uppercase tracking-[0.08em]
+                 text-[#F4F0EC] bg-[#0f3554] border border-[#0f3554]
+                 hover:bg-[#2563eb] transition"
+        >
+          Join Us
+        </a>
+
+        <div class="flex items-center gap-4">
+          {linkedin && (
+            <a href={linkedin} aria-label="LinkedIn" target="_blank" rel="noreferrer"
+               class="text-[#0f3554] hover:text-[#2563eb] transition">
+              <!-- LinkedIn icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4v15h-4V8zm7 0h3.83v2.05h.05c.53-1.01 1.83-2.08 3.77-2.08 4.03 0 4.78 2.65 4.78 6.09V23H16.94v-6.7c0-1.6-.03-3.66-2.23-3.66-2.24 0-2.58 1.75-2.58 3.55V23H7.5V8z"/>
+              </svg>
+            </a>
+          )}
+          {instagram && (
+            <a href={instagram} aria-label="Instagram" target="_blank" rel="noreferrer"
+               class="text-[#0f3554] hover:text-[#2563eb] transition">
+              <!-- Instagram icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 2a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm5.75-.75a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+              </svg>
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h5 class="uppercase tracking-[.08em] text-[1rem] font-semibold"
+          style="font-family:'Libre Baskerville',serif;">
+        Location
+      </h5>
+      <p class="mt-4 text-[15px]" style="font-family:'Inter',system-ui,sans-serif;">
+        {location}
+      </p>
+    </div>
+
+
+    <div>
+      <h5 class="uppercase tracking-[.08em] text-[1rem] font-semibold"
+          style="font-family:'Libre Baskerville',serif;">
+        Contact
+      </h5>
+      <p class="mt-4 text-[15px]" style="font-family:'Inter',system-ui,sans-serif;">
+        <a href={`mailto:${email}`} class="underline hover:no-underline">{email}</a>
+      </p>
+    </div>
+  </div>
+</footer>

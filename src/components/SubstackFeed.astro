@@ -1,0 +1,156 @@
+---
+import { XMLParser } from 'fast-xml-parser';
+
+const SUBSTACK_URL = "https://lusdaluiss.substack.com/feed";
+// Changed to fetch only one post
+const MAX_POSTS = 1;
+
+interface Post {
+  title: string;
+  link: string;
+  pubDate: string;
+  imageUrl: string | null;
+  postBody: string;
+  description: string | null;
+}
+
+// Simplified to hold a single post object, not columns
+let post: Post | null = null;
+
+try {
+  const response = await fetch(SUBSTACK_URL);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch RSS feed. Status: ${response.status}`);
+  }
+  const xmlData = await response.text();
+  
+  const parser = new XMLParser({ ignoreAttributes: false });
+  const feed = parser.parse(xmlData);
+  const items = feed.rss?.channel?.item || [];
+
+  // We only need the first post
+  if (items.length > 0) {
+    const item = items[0];
+    const fullContent: string = item['content:encoded'] || item.description || '';
+    const description: string | null = item.description ?
+ item.description.replace(/<[^>]+>/g, '') : null;
+    const imageRegex = /<img[^>]+src="([^">]+)"/;
+    const imageMatch = fullContent.match(imageRegex);
+    const imageUrl = imageMatch ? imageMatch[1] : null;
+    const postBody = fullContent.replace(/<figure>.*?<\/figure>/s, '');
+    
+    post = {
+      title: item.title,
+      link: item.link,
+      pubDate: new Date(item.pubDate).toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }),
+ 
+      imageUrl: imageUrl,
+      postBody: postBody,
+      description: description,
+    };
+  }
+} catch (error) {
+  console.error("Error fetching or parsing Substack feed:", error);
+}
+---
+
+<div class="substack-feed">
+  {post ? (
+    <div class="post">
+      <h2 class="post-title">
+        <a href={post.link} target="_blank" rel="noopener noreferrer">{post.title}</a>
+      </h2>
+      
+      {post.description && <p class="post-meta">{post.description}</p>}
+      
+      {post.imageUrl && (
+     
+       <a href={post.link} target="_blank" rel="noopener noreferrer" class="post-image-link">
+          <img src={post.imageUrl} alt={`Featured image for ${post.title}`} class="post-image" />
+        </a>
+      )}
+
+      <div class="post-body" set:html={post.postBody} />
+
+      <a href={post.link} target="_blank" rel="noopener noreferrer" class="read-more-link">
+        Read More &rarr;
+      </a>
+    </div>
+  ) : (
+    <p>Could not load post at this time.</p>
+  )}
+</div>
+
+<style>
+  .substack-feed {
+    font-family: sans-serif;
+    max-width: 960px;
+  }
+  
+  .post {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 40px; 
+    background-color: #fff;
+  }
+  .post-title {
+    font-size: 2.2rem;
+    margin: 0 0 15px 0;
+  }
+  .post-title a {
+    text-decoration: none;
+    color: #111;
+  }
+  .post-meta {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  .post-body {
+    color: #333; 
+    line-height: 1.6; 
+    overflow: hidden; 
+    display: -webkit-box; 
+    -webkit-box-orient: vertical; 
+    -webkit-line-clamp: 10;
+  }
+  .post-image-link {
+    display: block; 
+    max-width: 100%; 
+    margin: 25px 0;
+    border-radius: 8px; 
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+    /* REMOVED the line that was forcing the shape */
+    /* aspect-ratio: 16 / 9; */ 
+  }
+  .post-image {
+    width: 100%;
+    /* REMOVED properties that were cropping the image */
+    /* height: 100%; */
+    /* object-fit: cover; */
+    /* object-position: left center; */
+    transition: transform 0.3s ease;
+  }
+  .post-image-link:hover .post-image {
+    transform: scale(1.05);
+  }
+
+  .read-more-link {
+    display: inline-block;
+    margin-top: 25px;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #1D2A44;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+  .read-more-link:hover {
+    border-color: #1D2A44;
+  }
+</style>

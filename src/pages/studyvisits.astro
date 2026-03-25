@@ -1,0 +1,302 @@
+---
+export const prerender = true;
+import TopBlueHeader from "../components/TopBlueHeader.astro";
+import SiteFooter from "../components/Footer.astro";
+import KeenCarousel from "../components/KeenCarousel.astro";
+const {
+  title = "STUDY VISITS",
+  imageUrl = "/Pictures/EuropeanFlags.jpg",
+  height = "811px",    
+} = Astro.props;
+---
+<link rel="icon" type="image/png" href="/favicon.png">
+<title> LUSDA - Study Visits</title>
+<TopBlueHeader
+  logoSrc="/Pictures/Logo.png"
+  sticky={false}
+/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/keen-slider.min.css" />
+<section class="hero" style={`--hero-h:${height}; --hero-img:url('${imageUrl}')`} aria-label={title}>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="center">
+    <div class="title-wrap">
+      <h1 class="title">{title}</h1>
+    </div>
+  </div>
+</section>
+<section class="intro">
+  <div class="wrap">
+    <p class="lead">
+      Study Visits are a key activity of our Student Association, where we organise trips to the
+      headquarters of international organizations and policy institutions, along with trips abroad.
+      We offer students unique opportunities to deepen their understanding of international
+      relations, diplomacy, policy-making, and economics. Through these immersive experiences,
+      you'll engage directly with professionals, gain invaluable insights, and expand your global
+      perspective. Join us to explore the world of international affairs and take your academic
+      journey to the next level!
+    </p>
+  </div>
+</section>
+<section class="plain-section">
+  <div class="content">
+    <h2 style="
+  font-family: 'Cormorant Garamond','Times New Roman',serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #1D2A44;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0;
+">
+  STUDY VISITS IN ITALY
+</h2>
+<KeenCarousel gap={20}>
+  <article class="card">
+    <div class="media"><img src="/Pictures/maltamilitary.jpg" alt="" /></div>
+    <h3>SOVEREIGN MILITARY ORDER OF MALTA</h3>
+    <p>Stay informed about the latest developments in global politics and diplomacy. Diplomats often share their views on current events, emerging trends, and the impact of recent international decisions.</p>
+  </article>
+  <article class="card">
+    <div class="media"><img src="/Pictures/farnesina.jpg" alt="" /></div>
+    <h3>PALAZZO DELLA FARNESINA</h3>
+    <p>Engage in face-to-face discussions with current and former diplomats, ambassadors and high-ranking officials. These meetings are designed to provide you with unique perspectives on international relations, policy-making, and diplomatic negotiations.</p>
+  </article>
+    <article class="card">
+    <div class="media"><img src="/Pictures/palazzochigi.jpg" alt="" /></div>
+    <h3>PALAZZO CHIGI</h3>
+    <p>Learn about the diverse career paths within diplomacy and international relations. Our meetings often include personal career stories, advice on pursuing a career in diplomacy, and discussions on the skills and experiences necessary for success in the field.</p>
+  </article>
+    <article class="card">
+    <div class="media"><img src="/Pictures/fao.png" alt="" /></div>
+    <h3>FOOD AND AGRICULTURE ORGANIZATION</h3>
+    <p>Stay informed about the latest developments in global politics and diplomacy. Diplomats often share their views on current events, emerging trends, and the impact of recent international decisions.</p>
+  </article>
+      <article class="card">
+    <div class="media"><img src="/Pictures/spaceagency.png" alt="" /></div>
+    <h3>EUROPEAN SPACE AGENCY</h3>
+    <p>Build connections with professionals in the diplomatic field. These meetings provide a platform for networking with diplomats and other attendees, which can lead to mentorship, internships, and future career opportunities.</p>
+  </article>
+
+</KeenCarousel>
+</section>
+
+<section class="plain-section">
+  <div class="content">
+    <h2 style="
+      font-family: 'Cormorant Garamond','Times New Roman',serif;
+      font-size: 2.5rem; font-weight: 600;
+      color: #1D2A44; letter-spacing: .03em;
+      text-transform: uppercase; text-align: center; margin: 0;
+    ">
+      STUDY VISITS ABROAD
+    </h2>
+
+   <KeenCarousel gap={20} style="padding-bottom: 6rem;" >
+  <article class="card">
+    <div class="media"><img src="/Pictures/councileu.jpg" alt="" /></div>
+    <h3>COUNCIL OF THE EUROPEAN UNION</h3>
+    <p>The visit provided an overview of the Presidency rotation system. The delegation was introduced to the roles of trainees from Ireland, France, and the Netherlands, who shared insights on the functioning of working parties and committees, the voting process in Council sessions, and cooperation between member states. We also discussed the application process for traineeships and visited the red carpet where Ministers and Ambassadors enter Council sessions, taking photos with the flags.</p>
+  </article>
+  <article class="card">
+    <div class="media"><img src="/Pictures/eeas.jpeg" alt="" /></div>
+    <h3>EUROPEAN EXTERNAL ACTION SERVICE (EEAS)</h3>
+    <p>At EEAS, LUSDA explored EU diplomacy, security, and cultural diplomacy with insightful sessions led by experts. These sessions included an in-depth explanation of the EEAS&#39;s mission in external and internal actions while clarifying the measures and core strategic compass that led to the evolution of the EU security measures from 2003 onwards. </p>
+  </article>
+    <article class="card">
+    <div class="media"><img src="/Pictures/eucomission.jpeg" alt="" /></div>
+    <h3>EUROPEAN COMISSION</h3>
+    <p>At the EU Commission, LUSDA&#39;s delegation gained key insights into its functions, EU&#45;NATO relations, and global challenges, ending with a visit to the iconic Press Center.</p>
+  </article>
+    <article class="card">
+    <div class="media"><img src="/Pictures/euparliament.jpeg" alt="" /></div>
+    <h3>EUROPEAN PARLIAMENT</h3>
+    <p>LUSDA was hosted by the European Parliament, where a guided tour offered a comprehensive explanation of the hemicycle, the iconic chamber where Members of the European Parliament convene to debate and vote on key legislation. We also had the opportunity to learn about the crucial role of interpreters and translators, whose work ensures accessibility in all 24 EU languages, allowing seamless communication and participation for all citizens of the European Union, regardless of their linguistic background.</p>
+  </article>
+      <article class="card">
+    <div class="media"><img src="/Pictures/natohq.jpg" alt="" /></div>
+    <h3>NATO HQ</h3>
+    <p>The visit provided an in-depth overview of the alliance&#39;s structure, decision-making processes, and key missions in Kosovo and Iraq, while also addressing broader strategic challenges, including NATO&#45;Russia relations, the Ukraine crisis, media misinformation, strategic enlargement, and Italy&#39;s contributions to NATO missions and budget. Discussions also covered multilateral and bilateral meetings at HQ, the distinction between public and classified areas, countering fake news through social media and direct debunking, Italy&#39;s role within NATO, Chinese influence in the South, security cooperation, and NATO&#39;s collaboration with MAECI.</p>
+  </article>
+</KeenCarousel>
+
+
+</section>
+
+<SiteFooter
+  joinHref="/member"
+  location="Rome, RM, Italy"
+  email="lusdaassociation@gmail.com"
+/>
+
+<style>
+  .intro {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 16px;
+    text-align: center;
+  }
+
+  .lead {
+    margin: 0;
+    font-size: clamp(1.05rem, 0.8vw + 0.85rem, 1.25rem);
+    line-height: 1.9;
+    letter-spacing: 0.01em;
+    color: #000000 !important;
+    opacity: 1 !important; 
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .lead {
+      color: #eaeaea;
+    }
+  }
+  .hero{
+    position: relative;
+    width: 100%;
+    height: var(--hero-h);
+    overflow: hidden;
+    background-image: var(--hero-img);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+
+  .vignette{
+    position:absolute; inset:0;
+    background:
+      linear-gradient(90deg,
+        rgba(0,0,0,.45) 0%,
+        rgba(0,0,0,.15) 25%,
+        rgba(0,0,0,0) 45%,
+        rgba(0,0,0,0) 55%,
+        rgba(0,0,0,.15) 75%,
+        rgba(0,0,0,.45) 100%);
+    pointer-events:none;
+  }
+
+  .center{
+    position:absolute; inset:0;
+    display:grid; place-items:center;
+    padding: 0 1rem;
+  }
+
+
+  .title-wrap{
+    display:inline-block;
+    padding: .5rem 1.25rem;
+    border-radius: .5rem;
+    background: rgba(14, 31, 49, .6); 
+    backdrop-filter: blur(2px);
+    box-shadow: 0 6px 24px rgba(0,0,0,.25);
+  }
+
+  .title{
+    margin:0;
+    letter-spacing:.04em;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 2px 12px rgba(0,0,0,.45);
+    font-size: clamp(1.75rem, 4vw + .5rem, 4rem);
+  }
+
+
+  @media (max-width: 640px){
+    .hero{ height: 42vh; min-height: 280px; }
+  }
+ .plain-section {
+    background-color: #F4F0EC; 
+    padding: 60px 20px;    
+  }
+
+  .plain-section .content {
+    max-width: 1000px;       
+    margin: 0 auto;
+    text-align: center;  
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #1D2A44;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .kc-scope{
+  position: relative;
+  margin-top: 18px;
+}
+.kc-scope .kc-arrow{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 0; cursor: pointer;
+  background: #22324a; color: #fff;
+  display: grid; place-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,.2);
+}
+.kc-scope .kc-prev{ left: -12px; }
+.kc-scope .kc-next{ right: -12px; }
+
+.kc-scope .card{ text-align:left; }
+.kc-scope .card .media{ margin-bottom:.6rem; }
+.kc-scope .card .media img{ display:block; width:100%; height:auto; border-radius:8px; }
+.kc-scope .card h3{
+  margin:.2rem 0 .25rem;
+  font-family:"Libre Baskerville",serif;
+  text-transform:uppercase; letter-spacing:.02em;
+  font-weight:700; line-height:1; color:#0f3554;
+  font-size: clamp(1.1rem, 2.3vw, 1.75rem);
+}
+.kc-scope .card p{
+  margin:0; font-family:"Montserrat",system-ui,sans-serif;
+  color:#0f3554; opacity:.88; font-size:clamp(.95rem,1.2vw,1.05rem);
+  line-height:1.6;
+}
+</style>
+<script>
+(function () {
+  function initAbroadCarousel() {
+    const root = document.getElementById("kc-abroad");
+    if (!root || root.dataset.kcInited) return;
+
+    const Keen = window.KeenSlider;
+    if (!Keen) { console.warn("KeenSlider not loaded yet."); return; }
+
+    const scope = root.closest(".kc-scope");
+    const slider = new Keen(root, {
+      loop: false,
+      renderMode: "performance",
+      rubberband: false,
+      slides: { perView: 3, spacing: 20 },
+      breakpoints: {
+        "(max-width: 1024px)": { slides: { perView: 2, spacing: 18 } },
+        "(max-width: 640px)" : { slides: { perView: 1, spacing: 14 } },
+      },
+    });
+
+    scope?.querySelector(".kc-prev")?.addEventListener("click", () => slider.prev());
+    scope?.querySelector(".kc-next")?.addEventListener("click", () => slider.next());
+
+    root.dataset.kcInited = "1";
+  }
+
+  const ready = () => initAbroadCarousel();
+
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    ready();
+  } else {
+    document.addEventListener("DOMContentLoaded", ready, { once: true });
+  }
+
+  document.addEventListener("astro:page-load", ready);
+})();
+</script>

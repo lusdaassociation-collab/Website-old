@@ -1,0 +1,164 @@
+---
+
+const {
+  title = "",
+  data = [],
+  size = 300,
+  stroke = 34,
+} = Astro.props;
+
+const R = (size - stroke) / 2;
+const CIRC = 2 * Math.PI * R;
+const total = data.reduce((a, b) => a + (Number(b.value) || 0), 0) || 1;
+
+const palette = [
+  "#F0523B", "#F7B413", "#2D82B7", "#A855F7", "#16A34A",
+  "#EF4444", "#2480C4", "#84CC16", "#F59E0B", "#EC4899",
+];
+
+const segments = data.map((d, i) => ({
+  ...d,
+  color: d.color || palette[i % palette.length],
+  value: Number(d.value) || 0,
+}));
+
+let acc = 0;
+const arcs = segments.map((s) => {
+  const fraction = (s.value || 0) / total;
+  const len = fraction * CIRC;
+  const dasharray = `${len} ${CIRC - len}`;
+  const dashoffset = CIRC - acc * CIRC;
+  acc += fraction;
+  return { ...s, dasharray, dashoffset, percent: Math.round(fraction * 100) };
+});
+---
+<div class="pie-chart w-full">
+  {title && (
+    <h3
+      class="text-center text-[#0f3554] mb-4"
+      style="font-family:'Libre Baskerville',serif; font-size:clamp(1.2rem,2.2vw,2.2rem); font-weight:700;"
+    >
+      {title}
+    </h3>
+  )}
+
+  <div class="chart-root mx-auto relative" style={`width:${size}px; height:${size}px`}>
+    <svg viewBox={`0 0 ${size} ${size}`} width={size} height={size} class="block mx-auto">
+
+      <circle
+        cx={size/2} cy={size/2} r={R}
+        fill="none" stroke="rgba(0,0,0,0.08)" stroke-width={stroke}
+      />
+      {arcs.map((a) => (
+        <g>
+          <title>{a.label}: {a.value}</title>
+          <circle
+            cx={size/2} cy={size/2} r={R}
+            fill="none"
+            stroke={a.color}
+            stroke-width={stroke}
+            stroke-dasharray={a.dasharray}
+            stroke-dashoffset={a.dashoffset}
+            transform={`rotate(-90 ${size/2} ${size/2})`}
+            class="pc-arc"
+            style={`pointer-events: stroke; --pc-stroke:${stroke}px;`}
+            pointer-events="stroke"
+            data-label={a.label}
+            data-value={a.value}
+            data-percent={a.percent}
+            data-color={a.color}
+          />
+        </g>
+      ))}
+    </svg>
+
+    <div class="pointer-events-none absolute inset-0 grid place-items-center">
+      <div class="text-center"></div>
+    </div>
+  </div>
+
+  <ul class="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm">
+    {segments.map((s) => (
+      <li class="inline-flex items-center gap-2 text-[#0f3554]">
+        <span class="inline-block w-3 h-3 rounded-[3px]" style={`background:${s.color}`}></span>
+        <span style="font-family:'Inter',system-ui,sans-serif;">{s.label}</span>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style is:global>
+
+  .pie-chart .pc-arc {
+    transition: opacity .15s ease, filter .15s ease, stroke-width .15s ease;
+  }
+  .pie-chart .pc-arc:hover {
+    opacity: .95;
+    filter: brightness(1.12);
+    stroke-width: calc(var(--pc-stroke) + 2px);
+  }
+
+
+  .pie-tooltip {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    transform: translate(-50%, -115%);
+    opacity: 0;
+    transition: opacity .1s ease, transform .1s ease;
+    background: #111;
+    color: #fff;
+    padding: .38rem .6rem;
+    border-radius: .5rem;
+    font-size: 10px;
+    line-height: 1.5;
+    white-space: nowrap;
+    box-shadow: 0 6px 18px rgba(0,0,0,.18);
+  }
+  .pie-tooltip[data-show="1"] {
+    opacity: 1;
+    transform: translate(-50%, -120%);
+  }
+</style>
+
+<script is:inline>
+  (() => {
+
+    let tip = document.querySelector('.pie-tooltip');
+    if (!tip) {
+      tip = document.createElement('div');
+      tip.className = 'pie-tooltip';
+      document.body.appendChild(tip);
+    }
+
+    const root = document.currentScript.closest('.pie-chart');
+    if (!root) return;
+
+    const arcs = root.querySelectorAll('circle.pc-arc');
+
+    function show(text, clientX, clientY) {
+      tip.textContent = text;
+      tip.style.left = clientX + 'px';
+      tip.style.top  = clientY + 'px';
+      tip.setAttribute('data-show', '1');
+    }
+    function hide() { tip.setAttribute('data-show', '0'); }
+
+    arcs.forEach(arc => {
+      const label = arc.getAttribute('data-label') || '';
+      const value = arc.getAttribute('data-value') || '';
+      const text  = `${label}: ${value}`;
+
+      arc.addEventListener('mouseenter', e => show(text, e.clientX, e.clientY));
+      arc.addEventListener('mousemove',  e => show(text, e.clientX, e.clientY));
+      arc.addEventListener('mouseleave', hide);
+
+      arc.addEventListener('touchstart', e => {
+        const t = e.touches[0]; if (!t) return;
+        show(text, t.clientX, t.clientY);
+      }, { passive: true });
+      arc.addEventListener('touchend', hide,   { passive: true });
+      arc.addEventListener('touchcancel', hide,{ passive: true });
+    });
+  })();
+</script>

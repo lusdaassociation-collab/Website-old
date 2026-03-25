@@ -1,0 +1,111 @@
+---
+import TopBlueHeader from "../components/TopBlueHeader.astro";
+import SiteFooter from "../components/Footer.astro";
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LUSDA - 2025 YIAPD</title>
+  <link rel="icon" type="image/png" href="/Pictures/favicon.png">
+</head>
+<body>
+  <TopBlueHeader
+    logoSrc="/Pictures/Logo.png"
+    sticky={false}
+  />
+  <main>
+    <section class="yiapd-hero">
+      <img class="yiapd-hero__bg" src="/Pictures/yiapdcover.jpg" alt="Rabat Hassan Tower background">
+      <div class="yiapd-hero__overlay" aria-hidden="true"></div>
+      <div class="yiapd-hero__content">
+        <h1>YIAPD</h1>
+        <p>YOUTH INTERNATIONAL ASSOCIATION FOR PEACE AND DIPLOMACY</p>
+      </div>
+    </section>
+    <section class="yiapd-founders">
+      <div class="yf-wrap">
+        <p class="yf-eyebrow">LUSDA: FOUNDING ASSOCIATION OF YIAPD</p>
+        <h2 class="yf-title">
+          AS OF 2025, LUSDA IS PROUD TO BE OFFICIALLY<br>
+          RECOGNIZED AS ONE OF THE <span class="u">FOUNDING</span><br>
+          ASSOCIATIONS OF THE YOUTH <span class="u">INTERNATIONAL</span><br>
+          ASSOCIATION FOR PEACE AND DIPLOMACY (YIAPD)
+        </h2>
+        <div class="yf-cols">
+          <div class="yf-col">
+            <p>
+              Alongside prestigious institutions such as the
+              <strong>University of Oxford</strong>,
+              <strong>Sorbonne University</strong>, and
+              <strong>Mohammed VI Polytechnic University</strong>, LUSDA has
+              played a key role in shaping this global platform aimed at:
+            </p>
+            <ul class="yf-list">
+              <li>Promoting <strong>youth diplomacy</strong> and <strong>international cooperation</strong>.</li> 
+              <li>Facilitating <strong>inclusive cross-cultural dialogue</strong>.</li>
+              <li><strong>Empowering</strong> the next generation of <strong>global leaders</strong> committed to peace and diplomacy.</li>
+            </ul>
+          </div>
+          <div class="yf-col">
+            <p>
+              This achievement marks a significant milestone in LUSDA’s journey,
+              affirming its commitment to representing LUISS students on the
+              international stage and contributing to the future of global governance.
+            </p>
+            <p class="yf-quote">
+              “<strong>&#34;By the youth, for the youth&#34;</strong>” &mdash; LUSDA is not just
+              participating in change. We're building its foundation.
+            </p>
+          </div>
+        </div>
+      </div>
+      <svg class="yf-wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,75 C400,95 1040,95 1440,75" />
+      </svg>
+    </section>
+    <section class="booklet-sec">
+      <div class="booklet-wrap">
+        <p class="booklet-eyebrow">THE FULL BOOKLET</p>
+        <a class="booklet-cover" href="https://lusdaassociation.substack.com/p/yiapd-summit-in-rabat" target="_blank" rel="noopener">
+          <img src="/Pictures/yiapdjournal.png" alt="YIAPD Rabat Booklet cover">
+        </a>
+      </div>
+    </section>
+  </main>
+  <SiteFooter
+    joinHref="/join"
+    location="Rome, RM, Italy"
+    email="lusdaassociation@gmail.com"
+  />
+</body>
+</html>
+<style>
+:root{--page-bg: #f3efe9;--ink: #111218;--accent: #1f2e49;--container: 1240px;}
+.yiapd-hero{position: relative;min-height: 86vh;width: 100%;display: grid;place-items: center;overflow: hidden;isolation: isolate;}
+.yiapd-hero__bg{position: absolute;inset: 0;width: 100%;height: 100%;object-fit: cover;object-position: center;filter: saturate(1.05) contrast(1.02);}
+.yiapd-hero__overlay{position: absolute;inset: 0;background:radial-gradient(120% 70% at 50% 30%,rgba(0,0,0,0) 0%,rgba(0,0,0,.22) 60%,rgba(0,0,0,.45) 100%);pointer-events: none;}
+.yiapd-hero__content{position: relative;text-align: center;color: #fff;padding: 0 1rem;}
+.yiapd-hero__content h1{margin: 0 0 .6rem;font-weight: 800;text-transform: uppercase;letter-spacing: .02em;font-size: clamp(2.4rem, 6vw, 4.75rem);text-shadow: 0 2px 12px rgba(0,0,0,.35);}
+.yiapd-hero__content p{margin: 0;font-family: Georgia, "Times New Roman", serif;font-size: clamp(1rem, 1.6vw, 1.35rem);letter-spacing: .12em;text-shadow: 0 1px 10px rgba(0,0,0,.45);}
+  @media (max-width: 640px){.yiapd-hero{ min-height: 70vh;}}
+.yiapd-founders{position: relative;background: var(--page-bg);color: var(--ink);padding: 6.5rem 1.25rem 5.5rem;overflow: hidden;}
+  .yf-wrap{max-width: var(--container);margin: 0 auto;}
+.yf-eyebrow{text-align: center;margin: 0 0 1.5rem;opacity: .75;letter-spacing: .08em;text-transform: uppercase;font-family: Georgia, "Times New Roman", serif;font-size: .95rem;}
+.yf-title{margin: 0 auto 3rem;text-align: center;text-transform: uppercase;font-weight: 800;line-height: 1.1;letter-spacing: .01em;font-family: Georgia, "Times New Roman", serif;font-size: clamp(1.8rem, 3.2vw, 3rem);}
+.yf-title .u{text-decoration-line: underline;text-decoration-color: var(--accent);text-decoration-thickness: 3px;text-underline-offset: .4em;}
+.yf-cols{display: grid;grid-template-columns: 1fr 1fr;gap: clamp(2rem, 4vw, 4rem);margin-top: 2rem;align-items: start;font-size: clamp(1rem, .9vw + .85rem, 1.06rem);line-height: 1.8;}
+  .yf-list{margin: 1rem 0 0;padding-left: 1.2rem;}
+  .yf-list li{ margin: .4rem 0;}
+.yf-quote{margin-top: 1rem;font-weight: 600;}
+.yf-wave{position: absolute;left: 0; right: 0;bottom: -8px;width: 100%;height: 90px;}
+.yf-wave path{fill: none;stroke: var(--accent);stroke-width: 8;stroke-linecap: round;}
+  @media (max-width: 900px){.yiapd-founders{ padding: 4.5rem 1rem 4rem; }.yf-cols{ grid-template-columns: 1fr; }.yf-title{ margin-bottom: 2.25rem;}}
+.booklet-sec{background: var(--page-bg);color: var(--ink);padding: 3.5rem 1rem 4rem;}
+.booklet-wrap{max-width: 820px;margin: 0 auto;text-align: center;} 
+.booklet-eyebrow{margin: 0 0 .6rem;text-transform: uppercase;letter-spacing: .1em;font-family: Georgia, "Times New Roman", serif;font-size: 1rem;opacity: .85;}
+.booklet-link a{color: var(--accent);text-decoration-thickness: 2px;text-underline-offset: .18em;}
+  .booklet-link a:focus-visible{ outline: 2px dashed var(--accent); outline-offset: 4px; }
+.booklet-cover img{display: block;margin: 0 auto;width: min(100%, 640px);height: auto;border: 8px solid #fff;box-shadow: 0 8px 28px rgba(0,0,0,.08);}
+</style>

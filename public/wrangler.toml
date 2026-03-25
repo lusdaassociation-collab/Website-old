@@ -1,0 +1,35 @@
+name = "lusda-site"               # <- give your Worker/Pages Function a name
+compatibility_date = "2025-08-24" # use today's date (or newer)
+
+# Optional: if you’re deploying to Pages instead of a Worker,
+# Wrangler will infer this automatically from your repo.
+# If you want to force it as a Worker project, keep "main" above.
+
+[vars]
+# These are NOT secret, safe to commit to repo.
+MAIL_TO = "lusdaassociation@gmail.com"
+MAIL_FROM_EMAIL = "tiziano.pepe@gmail.com"
+MAIL_FROM_NAME = "LUSDA"
+# wrangler.toml
+name = "lusda-site"
+compatibility_date = "2024-11-21"
+
+[vars]
+# These are NOT secret, safe to commit to repo.
+MAIL_TO = "lusdaassociation@gmail.com"
+MAIL_FROM_EMAIL = "tiziano.pepe@gmail.com"
+MAIL_FROM_NAME = "LUSDA"
+
+# Bind the Send Email capability
+send_email = [
+  { name = "SEB", destination_address = "lusdaofficial@gmail.com" }
+]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "lusda-journals-db"
+database_id = "placeholder-d1-id" # user will replace
+
+[[r2_buckets]]
+binding = "JOURNAL_BUCKET"
+bucket_name = "lusda-journal-files"

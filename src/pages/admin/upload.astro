@@ -1,0 +1,203 @@
+---
+import TopBlueHeader from "../../components/TopBlueHeader.astro";
+import SiteFooter from "../../components/Footer.astro";
+export const prerender = false; // Server-rendered
+---
+
+<TopBlueHeader logoSrc="/Pictures/Logo.png" sticky={false} />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LUSDA - Admin Journal Upload</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F4F0EC;
+      --ink: #0f3554;
+      --ink-2: #26364d;
+      --muted: #495869;
+      --ring: #0f3554;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: Inter, sans-serif; line-height: 1.5; }
+    .hero { position: relative; height: 30vh; min-height: 200px; display: grid; place-items: center; background: var(--ink); }
+    .hero-title { position: relative; z-index: 1; text-align: center; font-family: "Libre Baskerville", serif; color: #fff; text-transform: uppercase; letter-spacing: .08em; font-size: clamp(20px, 3vw, 34px); }
+    .container { max-width: 720px; margin: 0 auto; padding: 48px 20px; min-height: 50vh; }
+    form { display: grid; gap: 20px; }
+    label { font-size: 14px; font-weight: 600; color: var(--ink-2); display: block; margin-bottom: 6px; }
+    input[type="text"], input[type="password"], textarea { width: 100%; padding: 12px; border: 1.5px solid rgba(15,53,84,.35); border-radius: var(--radius); background: #fff; color: var(--ink); font: inherit; transition: border-color .2s, box-shadow .2s; }
+    input:focus, textarea:focus { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px rgba(15,53,84,.15); }
+    textarea { resize: vertical; min-height: 120px; }
+    .file-drop { border: 2px dashed rgba(15,53,84,.35); border-radius: var(--radius); padding: 40px 20px; text-align: center; cursor: pointer; transition: all .2s; background: rgba(255,255,255,0.5); }
+    .file-drop.dragover { border-color: var(--ring); background: rgba(15,53,84,.05); }
+    .file-drop input[type="file"] { display: none; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; height: 46px; min-width: 140px; padding: 0 24px; border-radius: 18px; border: 1.5px solid var(--ring); background: var(--ink); color: #fff; text-transform: uppercase; letter-spacing: .08em; font-weight: 600; cursor: pointer; transition: all .2s; }
+    .btn:hover { background: transparent; color: var(--ink); }
+    .btn.outline { background: transparent; color: var(--ink); }
+    .btn.outline:hover { background: var(--ink); color: #fff; }
+    #status-msg { margin-top: 14px; font-weight: 600; text-align: center; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <h1 class="hero-title">Admin Upload Portal</h1>
+  </header>
+
+  <main class="container">
+    <!-- Login Section -->
+    <div id="login-section">
+      <h2 style="text-align: center; font-family: 'Libre Baskerville', serif; margin-bottom: 24px;">Admin Access Required</h2>
+      <form id="login-form">
+        <div>
+          <label for="admin-password">Password</label>
+          <input type="password" id="admin-password" required placeholder="Enter admin password">
+        </div>
+        <button type="submit" class="btn">Authenticate</button>
+        <div id="login-status" style="color: #e11d48; margin-top: 10px;"></div>
+      </form>
+    </div>
+
+    <!-- Upload Section -->
+    <div id="upload-section" class="hidden">
+      <h2 style="font-family: 'Libre Baskerville', serif; margin-bottom: 24px;">Upload New Diplomatic Digest</h2>
+      <form id="upload-form">
+        <div>
+          <label for="title">Journal Title</label>
+          <input type="text" id="title" name="title" required placeholder="e.g., Dispatch No. 22">
+        </div>
+        <div>
+          <label for="excerpt">Excerpt / Summary (Optional)</label>
+          <textarea id="excerpt" name="excerpt" placeholder="A brief description of this issue's contents..."></textarea>
+        </div>
+        <div>
+          <label>PDF File</label>
+          <div class="file-drop" id="drop-zone">
+            <span id="file-name">Drag & Drop a PDF here, or click to browse</span>
+            <input type="file" id="pdf-file" name="pdfFile" accept="application/pdf" required>
+          </div>
+        </div>
+        <div style="text-align: right; margin-top: 10px;">
+          <button type="submit" class="btn" id="submit-btn" disabled>Publish Journal</button>
+        </div>
+        <div id="upload-status" id="status-msg"></div>
+      </form>
+    </div>
+  </main>
+
+  <SiteFooter joinHref="/member" location="Rome, RM, Italy" email="lusdaassociation@gmail.com" />
+
+  <script>
+    const loginForm = document.getElementById('login-form');
+    const loginSection = document.getElementById('login-section');
+    const uploadSection = document.getElementById('upload-section');
+    const uploadForm = document.getElementById('upload-form');
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('pdf-file');
+    const fileNameDisplay = document.getElementById('file-name');
+    const submitBtn = document.getElementById('submit-btn');
+    const uploadStatus = document.getElementById('upload-status');
+    const loginStatus = document.getElementById('login-status');
+    
+    let adminToken = '';
+
+    // Login Handle
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const pwd = document.getElementById('admin-password').value;
+      loginStatus.textContent = 'Verifying...';
+      try {
+        const res = await fetch('/api/journals/auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pwd })
+        });
+        const data = await res.json();
+        if (data.success) {
+          adminToken = pwd;
+          loginSection.classList.add('hidden');
+          uploadSection.classList.remove('hidden');
+        } else {
+          loginStatus.textContent = 'Invalid password.';
+        }
+      } catch (err) {
+        loginStatus.textContent = 'Error connecting to server.';
+      }
+    });
+
+    // File Drop Handle
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      if (e.dataTransfer.files.length) {
+        fileInput.files = e.dataTransfer.files;
+        updateFileDisplay();
+      }
+    });
+    fileInput.addEventListener('change', updateFileDisplay);
+
+    function updateFileDisplay() {
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        if (file.type !== 'application/pdf') {
+          fileNameDisplay.textContent = 'Please select a valid PDF file.';
+          fileNameDisplay.style.color = '#e11d48';
+          submitBtn.disabled = true;
+          fileInput.value = '';
+        } else {
+          fileNameDisplay.textContent = `Selected: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+          fileNameDisplay.style.color = 'var(--ink)';
+          submitBtn.disabled = false;
+        }
+      }
+    }
+
+    // Upload Handle
+    uploadForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!fileInput.files.length) return;
+      
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Uploading...';
+      uploadStatus.textContent = '';
+      uploadStatus.style.color = 'var(--ink)';
+
+      const formData = new FormData();
+      formData.append('title', document.getElementById('title').value);
+      formData.append('excerpt', document.getElementById('excerpt').value);
+      formData.append('pdfFile', fileInput.files[0]);
+
+      try {
+        const res = await fetch('/api/journals/upload', {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${adminToken}` },
+          body: formData
+        });
+        const data = await res.json();
+        if (data.success) {
+          uploadStatus.textContent = 'Journal published successfully!';
+          uploadStatus.style.color = '#10b981';
+          uploadForm.reset();
+          fileNameDisplay.textContent = 'Drag & Drop a PDF here, or click to browse';
+          setTimeout(() => { uploadStatus.textContent = ''; }, 3000);
+        } else {
+          throw new Error(data.message || 'Upload failed');
+        }
+      } catch (err) {
+        uploadStatus.textContent = `Error: ${err.message}`;
+        uploadStatus.style.color = '#e11d48';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Publish Journal';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,307 @@
+---
+const {
+  maxWidth = "1200px",
+  top = [
+    { label: "Home", href: "/" },
+    {
+      label: "About",
+      children: [
+        { label: "2024/2025 TEAM", href: "/2024-2025Team" },
+        { label: "Founders & Presidents", href: "/Founders&Presidents" },
+        { label: "About LUSDA", href: "/about" },
+      ],
+    },
+    {
+      label: "Activities",
+      children: [
+        { label: "Meeting With Diplomats", href: "/meetingwithdiplomats" },
+        { label: "Study Visits", href: "/studyvisits" },
+        { label: "Conferences", href: "/conferences" },
+        { label: "Thematic Workshops", href: "/thematicworkshops" },
+        { label: "Cultural Events", href: "/culturalevents" },
+        { label: "Social Events", href: "/socialevents" },
+      ],
+    },
+    {
+      label: "Summits",
+      children: [{ label: "YIAPD", href: "/YIAPD" }],
+    },
+  ],
+  bottom = [
+    { label: "Events", href: "/events" },
+    {
+      label: "Reach out",
+      href: "/contact",
+      children: [{ label: "Become a Member", href: "/member" }],
+    },
+    { label: "Diplomatic Digest", href: "/thediplomaticdigest" },
+  ],
+  logoSrc = "/Pictures/Logo.png",
+  logoAlt = "LUSDA",
+  socials = {
+    linkedin: {
+      href: "https://www.linkedin.com/company/lusda/",
+      img: "/Pictures/linkedinwhitelogo.png",
+      alt: "LinkedIn",
+    },
+    instagram: {
+      href: "https://www.instagram.com/lusdaluiss/",
+      img: "/Pictures/instagram.png",
+      alt: "Instagram",
+    },
+  },
+} = Astro.props;
+---
+
+<section class="banner">
+  <div class="inner" style={`max-width:${maxWidth}`}>
+ 
+    <button
+      class="hamburger"
+      aria-controls="site-nav"
+      aria-expanded="false"
+      aria-label="Open menu"
+    >
+      <span></span><span></span><span></span>
+    </button>
+
+    <div id="site-nav" class="navWrapper" hidden>
+      <nav class="nav">
+        <ul class="row">
+          {top.map((item) => (
+            <li class="dd">
+              <a href={item.href} class="link">
+                {item.label}
+                {item.children && <span class="caret" aria-hidden="true">▾</span>}
+              </a>
+              {item.children && (
+                <ul class="menu">
+                  {item.children.map((c) => (
+                    <li><a href={c.href}>{c.label}</a></li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+        <ul class="row">
+          {bottom.map((item) => (
+            <li class="dd">
+              <a href={item.href} class="link">
+                {item.label}
+                {item.children && <span class="caret" aria-hidden="true">▾</span>}
+              </a>
+              {item.children && (
+                <ul class="menu">
+                  {item.children.map((c) => (
+                    <li><a href={c.href}>{c.label}</a></li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+
+
+    <div class="center">
+      <a href="/" aria-label="Home" class="center-hit">
+        <img src={logoSrc} alt={logoAlt} class="mark" />
+      </a>
+    </div>
+
+    <div class="icons">
+      {socials.linkedin && (
+        <a
+          href={socials.linkedin.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+        >
+          <img src={socials.linkedin.img} alt={socials.linkedin.alt} />
+        </a>
+      )}
+      {socials.instagram && (
+        <a
+          href={socials.instagram.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+        >
+          <img src={socials.instagram.img} alt={socials.instagram.alt} />
+        </a>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .banner { background:#1F3454; color:#fff; width:100%; }
+
+  /* ===== DESKTOP BAR ===== */
+  .inner {
+    position:relative;
+    margin:0 auto;
+    min-height:120px;
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+  }
+
+  .center {
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%, -50%);
+    pointer-events:none;
+    z-index:2;
+  }
+  .center .center-hit { pointer-events:auto; display:inline-block; }
+  .mark { width:94px; height:94px; object-fit:contain; border-radius:50%; }
+
+  .navWrapper { flex:1 1 auto; }
+  .nav { display:flex; flex-direction:column; gap:8px; }
+  .row { display:flex; gap:24px; align-items:center; flex-wrap:wrap; margin:0; padding:0; list-style:none; }
+  .link { color:#fff; text-decoration:none; font-size:17px; line-height:1.2; padding:8px 0; display:inline-flex; align-items:center; gap:6px; }
+  .link:hover { text-decoration:underline; text-underline-offset:4px; }
+  .dd { position:relative; }
+
+  .menu {
+    position:absolute; left:0; top:100%;
+    margin-top:4px;
+    background:#1F3454; border:1px solid rgba(255,255,255,.2);
+    border-radius:10px; padding:8px 0; min-width:230px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    opacity:0; visibility:hidden; transform:translateY(-2px);
+    transition:opacity .18s ease, visibility .18s ease, transform .18s ease;
+    z-index:50;
+  }
+  .menu li a { display:block; color:#fff; text-decoration:none; padding:9px 14px; font-size:15px; }
+  .menu li a:hover { background:rgba(255,255,255,.08); }
+
+  @media (hover:hover) and (pointer:fine) {
+    .dd:hover > .menu { opacity:1; visibility:visible; transform:translateY(0); }
+    .caret { display:none; }
+  }
+
+  .icons { display:flex; justify-content:flex-end; gap:10px; align-items:center; }
+  .icons img { height:28px; display:block; }
+
+  .hamburger {
+    width:44px; height:44px; display:none;
+    align-items:center; justify-content:center;
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:10px; background:transparent; cursor:pointer;
+  }
+  .hamburger span {
+    display:block; width:22px; height:2px; background:#fff; margin:3px 0;
+    transition:transform .2s ease, opacity .2s ease;
+  }
+  .hamburger.is-open span:nth-child(1){ transform:translateY(5px) rotate(45deg); }
+  .hamburger.is-open span:nth-child(2){ opacity:0; }
+  .hamburger.is-open span:nth-child(3){ transform:translateY(-5px) rotate(-45deg); }
+
+  @media (max-width: 900px) {
+    .inner {
+      display:grid;
+      grid-template-columns: 44px 1fr 44px;
+      grid-template-areas:
+        "burger center icons"
+        "nav    nav    nav";
+      min-height:auto; padding:12px 12px 8px;
+      gap:10px;
+    }
+    .hamburger { display:flex; grid-area:burger; }
+    .center { position:relative; left:auto; top:auto; transform:none; grid-area:center; pointer-events:auto; justify-self:center; }
+    .mark { width:72px; height:72px; }
+    .icons { grid-area:icons; }
+    .icons img { height:24px; }
+
+    .navWrapper { grid-area:nav; transition:max-height .25s ease; max-height:0; overflow:hidden; }
+    .navWrapper[hidden] { display:block; height:0; overflow:hidden; }
+    .navWrapper.open { max-height:70vh; }
+
+    .nav { padding:8px 4px 12px; border-top:1px solid rgba(255,255,255,.2); }
+    .row { flex-direction:column; align-items:stretch; gap:2px; }
+
+    .menu {
+      position:static; border:none; box-shadow:none; padding:0 0 8px 14px;
+      background:transparent; min-width:auto; margin-top:0;
+      opacity:1; visibility:visible; transform:none; display:none;
+      z-index:auto;
+    }
+    .menu.mobile-open { display:block; }
+
+    .caret { display:inline-block; }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const bp = 900;
+    const navWrapper = document.getElementById('site-nav');
+    const burger = document.querySelector('.hamburger');
+    const dropdowns = document.querySelectorAll('.dd');
+
+    const setState = () => {
+      if (window.innerWidth <= bp) {
+        navWrapper.hidden = false;
+        navWrapper.classList.remove('open');
+        burger?.setAttribute('aria-expanded', 'false');
+        burger?.classList.remove('is-open');
+        document.querySelectorAll('.menu.mobile-open').forEach(m => m.classList.remove('mobile-open'));
+      } else {
+        navWrapper.hidden = false;
+        navWrapper.classList.add('open');
+        burger?.setAttribute('aria-expanded', 'false');
+        burger?.classList.remove('is-open');
+      }
+    };
+    setState();
+
+    burger?.addEventListener('click', () => {
+      const isOpen = navWrapper.classList.toggle('open');
+      burger.classList.toggle('is-open', isOpen);
+      burger.setAttribute('aria-expanded', String(isOpen));
+    });
+
+  
+    dropdowns.forEach(dd => {
+      const link = dd.querySelector('a.link');
+      const menu = dd.querySelector('.menu');
+      if (!link || !menu) return;
+
+      link.addEventListener('click', (e) => {
+        if (window.innerWidth <= bp) {
+          e.preventDefault();
+          dd.parentElement?.querySelectorAll('.menu.mobile-open').forEach(m => {
+            if (m !== menu) m.classList.remove('mobile-open');
+          });
+          menu.classList.toggle('mobile-open');
+        }
+      });
+    });
+
+
+    window.addEventListener('resize', () => {
+      setState();
+      if (window.innerWidth > bp) {
+        document.querySelectorAll('.menu.mobile-open').forEach(m => m.classList.remove('mobile-open'));
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth > bp) return;
+      const within = e.target.closest('.navWrapper, .hamburger');
+      if (!within && navWrapper.classList.contains('open')) {
+        navWrapper.classList.remove('open');
+        burger?.classList.remove('is-open');
+        burger?.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+</script>
+

@@ -1,0 +1,51 @@
+---
+import TopBlueHeader from "../components/TopBlueHeader.astro";
+import SiteFooter from "../components/Footer.astro";
+export const prerender = true;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About LUSDA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/Pictures/favicon.png">
+</head>
+<body>
+  <TopBlueHeader
+    logoSrc="/Pictures/Logo.png"
+    sticky={false}
+  />
+  <main>
+    <div class="about-wrapper" style="max-width: 1200px; margin: 80px auto; padding: 0 20px; display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap;">
+      <div style="flex: 1 1 500px;">
+        <h2 style="font-family: 'Playfair Display', serif; color: #253551; font-size: 2.5rem; margin-bottom: 2rem;">
+          ABOUT LUSDA
+        </h2>
+        <p style="font-family: 'Montserrat', sans-serif; color: #444; font-size: 1rem; line-height: 1.7; margin-bottom: 1.5rem;">
+          Founded in November 2022 by Abdelkarim Skouri and Manon Sophie Vogel, the Students Diplomatic Association (LUSDA) at Luiss University was established to foster a vibrant community of students who are eager to explore the intricacies of international relations and diplomacy. We believe that practical experience coupled with theoretical background is essential in understanding today's global landscape.
+        </p>
+        <p style="font-family: 'Montserrat', sans-serif; color: #444; font-size: 1rem; line-height: 1.7; margin-bottom: 1.5rem;">
+          Our association encourages members to engage actively with contemporary diplomatic challenges, cultivate their skills through workshops, and connect with professionals in the field. Your unique narrative and perspective can make a meaningful impact not just within our community but also in the wider world of international affairs.
+        </p>
+        <p style="font-family: 'Montserrat', sans-serif; color: #444; font-size: 1rem; line-height: 1.7; margin-bottom: 1.5rem;">
+          Join us also in our study visits and our cultural events where we visit a variety of institutions with the goal of acquiring a baggage of knowledge and experience that goes beyond the classroom. These visits and cultural events provide members with firsthand insights into the workings of international organizations, embassies, and other key institutions. By interacting with diplomats, policymakers, and experts, you will gain a deeper understanding of global issues and the role of diplomacy in addressing them.
+        </p>
+        <p style="font-family: 'Montserrat', sans-serif; color: #444; font-size: 1rem; line-height: 1.7;">
+          Whether you're passionate about conflict resolution, human rights, economic diplomacy, or any other aspect of international relations, LUSDA offers you a platform to explore these interests. Together, we aim to build a community that is not only informed but also prepared to contribute to the world of international affairs with confidence and competence.<br><br>
+          Join us, and let's shape the future of diplomacy together.
+        </p>
+      </div>
+      <div style="flex: 1 1 300px; display: flex; justify-content: center; align-self: center;">
+        <img src="/Pictures/ABOUTLUSDALOGO.png" alt="LUSDA Logo" style="max-width: 300px; width: 100%; object-fit: contain;">
+      </div>
+    </div>
+  </main>
+  <SiteFooter
+    joinHref="/member"
+    location="Rome, RM, Italy"
+    email="lusdaassociation@gmail.com"
+  />
+</body>
+</html>

@@ -1,0 +1,78 @@
+---
+import TopBlueHeader from "../components/TopBlueHeader.astro";
+import SiteFooter from "../components/Footer.astro";
+import KeenCarousel from "../components/KeenCarousel.astro";
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LUSDA - Thematic Workshops</title>
+  <link href="[https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap](https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap)" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/Pictures/favicon.png">
+</head>
+<body>
+  <TopBlueHeader
+    logoSrc="/Pictures/Logo.png"
+    sticky={false}
+  />
+  <main>
+    <section class="ws-hero" aria-label="Thematic Workshops">
+      <div class="ws-hero__overlay" aria-hidden="true"></div>
+      <h1 class="ws-hero__title">THEMATIC WORKSHOPS</h1>
+    </section>
+
+    <section class="few-words">
+      <div class="fw-container">
+        <h2 class="fw-title">
+          <span>IN A FEW</span><br />
+          <span>WORDS...</span>
+        </h2>
+        <p class="fw-text">
+          The Thematic Workshops activities are meant for students to develop their soft skills and to
+          place themselves in a dynamic environment where they can actively learn different subjects
+          related to the field of diplomacy. The workshops range from debates to diplomatic simulations,
+          and from career oriented workshops to negotiation labs. With the help of professional speakers
+          and professors the thematic workshops activity becomes a hub for dynamic learning.
+        </p>
+      </div>
+    </section>
+
+    <KeenCarousel gap={20}>
+      <article class="card">
+        <div class="media"><img src="/Pictures/simulations.jpg" alt="Simulations" /></div>
+        <h3>SIMULATIONS</h3>
+      </article>
+      <article class="card">
+        <div class="media"><img src="/Pictures/careerworkshops.png" alt="Career Workshops" /></div>
+        <h3>CAREER WORKSHOPS</h3>
+      </article>
+      <article class="card">
+        <div class="media"><img src="/Pictures/negotiationlabs.png" alt="Negotiation Labs" /></div>
+        <h3>NEGOTIATION LABS</h3>
+      </article>
+      <article class="card">
+        <div class="media"><img src="/Pictures/debates.jpg" alt="Debates" /></div>
+        <h3>DEBATES</h3>
+      </article>
+    </KeenCarousel>
+  </main>
+  <SiteFooter
+    joinHref="/member"
+    location="Rome, RM, Italy"
+    email="lusdaassociation@gmail.com"
+  />
+</body>
+</html>
+<style>
+  .ws-hero{position: relative;width: 100%;height: 811px;background: url("/Pictures/ThematicWorkshop.jpg") center / cover no-repeat;overflow: hidden;}
+  .ws-hero__overlay{position: absolute;inset: 0;background:linear-gradient(180deg, rgba(0,0,0,.08) 0%, rgba(0,0,0,.18) 55%, rgba(0,0,0,.28) 100%);pointer-events: none;}
+  .ws-hero__title{position: absolute;top: 50%;left: clamp(16px, 12vw, 240px);transform: translateY(-50%);margin: 0;text-transform: uppercase;font-weight: 800;font-size: clamp(1.9rem, 5vw + .2rem, 4rem);letter-spacing: .008em;color: #ffffff;}
+  @media (max-width: 640px){.ws-hero__title{ left: 20px; }}
+  .few-words{background:#F4F0EC;padding: 80px 0;color:#1D2A44;}
+  .fw-container{max-width: 1200px;margin: 0 auto;padding: 0 24px;display: grid;grid-template-columns: minmax(240px, 360px) 1fr;gap: 72px;align-items: start;}
+  .fw-title{margin: 0;font-family:'Cormorant Garamond','Times New Roman',serif;font-weight:600;text-transform:uppercase;letter-spacing:.02em;line-height:1.05;font-size: clamp(2rem, 2.6vw + 1rem, 3.25rem);color:#1D2A44;}
+  .fw-text{margin: 0;font-size: clamp(1.05rem, .6vw + .9rem, 1.2rem);line-height: 1.9;color:#1D2A44;max-width: 900px;}
+  @media (max-width: 800px){.fw-container{ grid-template-columns: 1fr; gap: 28px; }}
+</style>

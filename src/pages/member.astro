@@ -1,0 +1,174 @@
+---
+import TopBlueHeader from "../components/TopBlueHeader.astro";
+import SiteFooter from "../components/Footer.astro";
+export const prerender = true;
+---
+
+<TopBlueHeader
+  logoSrc="/Pictures/Logo.png"
+  sticky={false}
+/>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LUSDA - Become a Member!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#F4F0EC;
+      --ink:#0f3554; --ink-2:#26364d; --muted:#495869;
+      --ring:#0f3554; --radius:14px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,sans-serif;line-height:1.5;}
+
+    .hero{position:relative;height:38vh;min-height:240px;max-height:420px;display:grid;place-items:center;overflow:hidden;}
+    .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;transform:scale(1.04);}
+    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.35),rgba(0,0,0,.05) 45%,transparent);}
+    .hero-title{position:relative;z-index:1;text-align:center;font-family:"Libre Baskerville",serif;color:#fff;text-transform:uppercase;letter-spacing:.08em;font-size:clamp(20px,3vw,34px);text-shadow:0 2px 12px rgba(0,0,0,.35);}
+
+    .container{max-width:960px;margin:0 auto;padding:48px 20px;}
+    .lead{max-width:720px;margin:0 auto 24px;color:var(--ink-2);font-size:16px;}
+    .lead b{font-weight:700;font-family:Montserrat,sans-serif}
+
+    form{max-width:720px;margin:0 auto;}
+    .row{display:grid;gap:14px;}
+    .row.two{grid-template-columns:1fr 1fr;}
+    @media(max-width:640px){.row.two{grid-template-columns:1fr;}}
+    label{display:block;font-size:12px;color:var(--muted);margin:14px 0 6px 2px;}
+    .hint{font-size:11px;color:var(--muted);margin-left:4px}
+    input,select{width:100%;height:44px;padding:10px 12px;border:1.5px solid rgba(15,53,84,.35);border-radius:var(--radius);background:#fff;color:var(--ink);font:inherit;transition:border-color .2s,box-shadow .2s;}
+    input:focus,select:focus{outline:none;border-color:var(--ring);box-shadow:0 0 0 3px 
+ rgba(15,53,84,.15);}
+    .actions{margin-top:18px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;height:46px;min-width:112px;padding:0 22px;border-radius:18px;border:1.5px solid var(--ring);background:transparent;color:var(--ink);text-transform:uppercase;letter-spacing:.08em;font-weight:600;cursor:pointer;transition:all .2s;}
+    .btn:hover{background:var(--ink);color:#fff}
+    .btn:active{transform:translateY(1px)}
+    #join-status{font-size:14px;margin-left:10px;color:var(--ink-2);}
+
+    .footer{border-top:1px solid rgba(15,53,84,.12);margin-top:64px;padding:28px 0 40px;font-size:14px;}
+    .foot-grid{max-width:960px;margin:0 auto;padding:0 20px;display:grid;gap:20px;grid-template-columns:2fr 1fr 1.2fr;}
+    @media(max-width:840px){.foot-grid{grid-template-columns:1fr;text-align:center}}
+    .brand{font-family:Montserrat,sans-serif;font-weight:700;letter-spacing:.04em}
+    .socials{display:flex;align-items:center;gap:14px;margin-top:10px;justify-content:center}
+    .join-mini{display:inline-block;padding:6px 14px;border-radius:12px;border:1px solid var(--ring);text-decoration:none;color:var(--ink);font-size:12px;text-transform:uppercase;letter-spacing:.08em;}
+    .join-mini:hover{background:var(--ink);color:#fff}
+    a.link{color:var(--ink-2);text-decoration:underline;text-underline-offset:3px}
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <img src="/Pictures/tuxguymember.jpg" alt="">
+    <h1 class="hero-title">Become a LUSDA Member</h1>
+  </header>
+
+  <main class="container">
+    <p class="lead">
+    
+      Join our team, <b>become a LUSDA member!</b> By becoming a member you will have access to all
+      of the activities we organize. [cite: 12] You&#39;ll be notified of our upcoming events and you&#39;ll have
+      the opportunity to actively participate in shaping our initiatives. [cite: 13, 14] As a member of LUSDA,
+      you can engage in workshops, study visits, cultural events, and meetings with a variety of
+      profiles in the diplomatic world&#8211;designed to deepen your understanding of international
+      relations and diplomacy. [cite: 15] </p>
+
+    <form id="join-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="971ba36a-e275-43e1-95e5-6d1025012159">
+      <input type="hidden" name="redirect" value="https://lusda.org/thankyou/">
+      <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0">
+
+      <div class="row two">
+        <div>
+          <label for="first">First Name <span class="hint">(required)</span></label>
+          <input id="first" name="firstName" type="text" required>
+        </div>
+        <div>
+     
+          <label for="last">Last Name <span class="hint">(required)</span></label>
+          <input id="last" name="lastName" type="text" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="email">LUISS Email <span class="hint">(required)</span></label>
+        <input id="email" name="email" type="email" required placeholder="name.surname@luiss.it">
+      </div>
+
+      <div class="row">
+        <label for="phone">Phone Number</label>
+        
+        <input id="phone" name="phone" type="tel" placeholder="+39 333 123 4567">
+      </div>
+
+      <div class="row">
+        <label for="nationality">Nationality <span class="hint">(required)</span></label>
+        <input id="nationality" name="nationality" type="text" required>
+      </div>
+
+      <div class="row">
+        <label for="degreeLevel">Degree Level <span class="hint">(required)</span></label>
+        <select id="degreeLevel" name="degreeLevel" required>
+          <option value="" disabled selected>Select your degree level</option>
+          <option>Bachelor</option>
+          <option>Master</option>
+          <option>Single Cycle / Law</option>
+          <option>PhD</option>
+          <option>Exchange / Other</option>
+        </select>
+      </div>
+
+      <div class="row two">
+        <div>
+          <label for="courseOfStudy">Course of Study <span class="hint">(required)</span></label>
+          <input id="courseOfStudy" name="courseOfStudy" type="text" required placeholder="e.g. International Relations">
+        </div>
+        <div>
+          <label for="year">Year <span class="hint">(required)</span></label>
+          <select id="year" name="year" required>
+            <option value="" disabled selected>Select your year</option>
+            <option>1st</option>
+            <option>2nd</option>
+            <option>3rd</option>
+            <option>4th</option>
+            <option>5th</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" type="submit">Send</button>
+        <span id="join-status"></span>
+      </div>
+    
+    </form>
+  </main>
+
+  <SiteFooter
+  joinHref="/member"
+  location="Rome, RM, Italy"
+  email="lusdaassociation@gmail.com"
+  linkedin="https://www.linkedin.com/your-page"
+  instagram="https://instagram.com/your-page"
+/>
+  <script>
+    const form = document.getElementById('join-form'); // This now correctly selects the form 
+    const statusEl = document.getElementById('join-status');
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      statusEl.textContent = 'Sending…';
+      try {
+        const res = await fetch(form.action, { method:'POST', body:new FormData(form) });
+        if (!res.ok) throw new Error(await res.text());
+        // Success: Redirect to the thank you page 
+        window.location.href = '/thankyou'; 
+      } catch(err) {
+        statusEl.textContent = 'Something went wrong. Please try again.';
+        
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>

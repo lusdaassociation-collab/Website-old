@@ -1,0 +1,451 @@
+---
+export const prerender = true;
+import TopBlueHeader from "../components/TopBlueHeader.astro";
+import SiteFooter from "../components/Footer.astro";
+import PieChart from "../components/PieChart.astro";
+const {
+  title = "CONFERENCES",
+  imageUrl = "/Pictures/Conference.jpg", // <- put your image path here
+  height = "811px",                      // match screenshot height
+} = Astro.props;
+
+---
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/keen-slider.min.css">
+<TopBlueHeader
+  logoSrc="/Pictures/Logo.png"
+  sticky={false}
+/>
+<title>LUSDA -  Conferences </title>
+<section class="hero" style={`--hero-h:${height}; --hero-img:url('${imageUrl}')`} aria-label={title}>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="center">
+    <div class="title-wrap">
+      <h1 class="title">{title}</h1>
+    </div>
+  </div>
+</section>
+<section class="intro">
+  <div class="wrap">
+    <p class="lead">
+      LUSDA&apos;s main objective is to explore every facet of diplomacy. Our conferences are designed to connect members with diverse voices&mdash;from politicians and activists to representatives of NGOs and international organizations&mdash;allowing us to learn from each sector. These interactions provide our members with a comprehensive understanding of how diplomacy functions across various fields. By engaging with experts from different sectors, we aim to equip our community with the knowledge and skills needed to navigate the complexities of global affairs.
+    </p>
+  </div>
+</section>
+<section class="mt-14">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 items-start">
+    <PieChart
+      title="AREAS OF FOCUS"
+      size={300}
+      stroke={60}
+      data={[
+        { label: "Security", value: 1, color: "#102C63" },
+        { label: "Health", value: 1, color: "#074BE6" },
+        { label: "Sports", value:  1, color: "#5192EB" },
+        { label: "Economy", value: 1, color: "#9EADD3" },
+        { label: "Energy", value:  1, color: "#E1DCFC" },
+      ]}
+    />
+
+    <PieChart
+      title="KEY INSTITUTIONS & FIGURES"
+      size={300}
+      stroke={60}
+      data={[
+        { label: "Think Tanks", value: 1, color: "#628CBB" },
+        { label: "Politicians", value: 1, color: "#D1BE4E" },
+        { label: "Activists", value:  1, color: "#5A6269" },
+        { label: "CEOs", value:  1, color: "#0D4C88" },
+        { label: "NGOs & IOs", value:  1, color: "#BCC7D0" },
+      ]}
+    />
+  </div>
+</section>
+<section class="conferences">
+  <div class="container">
+    <h2 class="section-title">OUR CONFERENCES</h2>
+
+    <div class="conf-grid">
+      <!-- Left column -->
+      <article class="conf">
+        <figure class="conf-media">
+          <img src="/Pictures/ConferencesItaly.png" alt="Conference in Italy">
+        </figure>
+        <h3 class="conf-heading">CONFERENCES ITALY</h3>
+        <p class="conf-desc">
+          Our conferences in Italy provide a unique platform for members to engage with influential figures within the heart of European diplomacy. These events offer firsthand insights into Italy's role in international relations, allowing participants to connect with local and global experts.
+        </p>
+      </article>
+
+      <article class="conf">
+        <figure class="conf-media">
+          <img src="/Pictures/conference.jpeg" alt="International conference">
+        </figure>
+        <h3 class="conf-heading">INTERNATIONAL CONFERENCES</h3>
+        <p class="conf-desc">
+          Our conferences abroad offer members the chance to immerse themselves in diverse diplomatic environments around the world. These international events provide unique perspectives on global issues, allowing participants to learn directly from experts and practitioners in various cultural and political contexts.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+<section class="pictures">
+  <div class="container">
+    <h2 class="section-title">OUR CONFERENCES IN PICTURES</h2>
+
+    <div id="conf-photos" class="keen-slider pictures-slider">
+      <div class="keen-slider__slide">
+        <img src="/Pictures/OURCONFERENCES1.jpg" alt="Conference photo 1" loading="lazy">
+      </div>
+      <div class="keen-slider__slide">
+        <img src="/Pictures/OURCONFERENCES2.JPG" alt="Conference photo 2" loading="lazy">
+      </div>
+      <div class="keen-slider__slide">
+        <img src="/Pictures/OURCONFERENCES3.JPG" alt="Conference photo 3" loading="lazy">
+      </div>
+      <div class="keen-slider__slide">
+        <img src="/Pictures/OURCONFERENCES4.JPG" alt="Conference photo 4" loading="lazy">
+      </div>
+        <div class="keen-slider__slide">
+        <img src="/Pictures/OURCONFERENCES5.jpg" alt="Conference photo 4" loading="lazy">
+      </div>
+
+      <button class="nav prev" aria-label="Previous slide">‹</button>
+      <button class="nav next" aria-label="Next slide">›</button>
+    </div>
+  </div>
+</section>
+<section class="expect" aria-labelledby="expect-title">
+  <div class="expect__container">
+    <h2 id="expect-title" class="expect__title">WHAT TO EXPECT</h2>
+
+    <div class="expect__grid">
+      <article class="expect__item">
+        <h3 class="expect__heading">ENGAGE WITH GLOBAL LEADERS</h3>
+        <p class="expect__text">
+          Attend sessions with politicians, representatives from NGOs, international organizations (IOs),
+          and key players in the private sector. Hear directly from those who are shaping the policies and
+          decisions that impact the world.
+        </p>
+      </article>
+
+      <article class="expect__item">
+        <h3 class="expect__heading">LEARN FROM EXPERTS</h3>
+        <p class="expect__text">
+          Gain knowledge from leading experts in diplomacy, international law, and global governance.
+          Our conferences feature panels, lectures, and workshops led by those at the forefront of their fields.
+        </p>
+      </article>
+
+      <article class="expect__item">
+        <h3 class="expect__heading">CONNECT WITH ACTIVISTS</h3>
+        <p class="expect__text">
+          Understand the critical role of activism in international relations by engaging with activists
+          who are driving change on issues such as human rights, environmental protection, and social justice.
+        </p>
+      </article>
+
+      <article class="expect__item">
+        <h3 class="expect__heading">NETWORKING AND COLLABORATION</h3>
+        <p class="expect__text">
+          Conferences are not just about listening&mdash;they&#39;re about connecting. Network with influential figures
+          and like-minded peers, opening doors to collaborations, internships, and career opportunities.
+        </p>
+      </article>
+
+      <article class="expect__item">
+        <h3 class="expect__heading">GLOBAL PERSPECTIVE</h3>
+        <p class="expect__text">
+          Whether in Italy or abroad, our conferences are carefully chosen to reflect the most pressing issues
+          in international relations today. From regional conflicts to global economic trends, you&#39;ll gain a broad
+          perspective on the challenges and opportunities facing the world.
+        </p>
+      </article>
+
+      <article class="expect__item">
+        <h3 class="expect__heading">ITALIAN PERSPECTIVE</h3>
+        <p class="expect__text">
+          Gain firsthand insights into Italy&#39;s strategic influence in international relations. Through these
+          conferences, you&#39;ll explore how Italy navigates complex geopolitical challenges, collaborates with
+          international partners, and shapes policies that impact global stability and development.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
+<SiteFooter
+  joinHref="/member"
+  location="Rome, RM, Italy"
+  email="lusdaassociation@gmail.com"
+/>
+<style>
+  .intro {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 16px;
+    text-align: center;
+  }
+
+  .lead {
+    margin: 0;
+    font-size: clamp(1.05rem, 0.8vw + 0.85rem, 1.25rem);
+    line-height: 1.9;
+    letter-spacing: 0.01em;
+    color: #000000 !important;
+    opacity: 1 !important; 
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .lead {
+      color: #eaeaea;
+    }
+  }
+  .hero{
+    position: relative;
+    width: 100%;
+    height: var(--hero-h);
+    overflow: hidden;
+    /* background image */
+    background-image: var(--hero-img);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* soft dark vignette left & right like the screenshot */
+  .vignette{
+    position:absolute; inset:0;
+    background:
+      linear-gradient(90deg,
+        rgba(0,0,0,.45) 0%,
+        rgba(0,0,0,.15) 25%,
+        rgba(0,0,0,0) 45%,
+        rgba(0,0,0,0) 55%,
+        rgba(0,0,0,.15) 75%,
+        rgba(0,0,0,.45) 100%);
+    pointer-events:none;
+  }
+
+  .center{
+    position:absolute; inset:0;
+    display:grid; place-items:center;
+    padding: 0 1rem;
+  }
+  .title{
+    margin:0;
+    letter-spacing:.02em;
+    font-weight: 600;
+    color: #1D2A44;
+    font-size: clamp(1.75rem, 4vw + .5rem, 4rem);
+  }
+
+  /* Responsive height tweak for small screens */
+  @media (max-width: 640px){
+    .hero{ height: 42vh; min-height: 280px; }
+  }
+ .plain-section {
+    background-color: #F4F0EC; /* your color */
+    padding: 60px 20px;        /* spacing top/bottom + sides */
+  }
+
+  .plain-section .content {
+    max-width: 1000px;         /* keeps content centered */
+    margin: 0 auto;
+    text-align: center;        /* optional */
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', 'Times New Roman', serif; /* or Playfair */
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #1D2A44; /* dark navy */
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .conferences {
+    padding: 56px 20px 80px;
+    background: #fff; /* keep page white as in screenshot */
+  }
+
+  .conferences .container {
+    max-width: 1220px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond','Times New Roman',serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #1D2A44;
+    text-align: center;
+    font-size: clamp(2rem, 2.5vw + 1rem, 3rem);
+    margin: 0 0 32px;
+  }
+
+  .conf-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 3vw, 48px);
+    align-items: start;
+  }
+
+  /* Card pieces */
+  .conf-media {
+    margin: 0 0 18px;
+  }
+
+  .conf-media img {
+    width: 100%;
+    display: block;
+    height: min(30vw, 420px);
+    object-fit: cover;
+    object-position: center;
+    border-radius: 2px;
+  }
+
+  .conf-heading {
+    font-family: 'Cormorant Garamond','Times New Roman',serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #1D2A44;
+    text-align: center;
+    font-size: clamp(1.25rem, 1.2vw + 1rem, 1.75rem);
+    margin: 6px 0 14px;
+  }
+
+  .conf-desc {
+    max-width: 560px;              
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: #000;
+  }
+
+  @media (max-width: 900px) {
+    .conf-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .conf-media img {
+      height: 54vw;               
+      max-height: 420px;
+    }
+  }
+  .pictures { padding: 56px 0 20px; background:#fff; }
+.pictures .container { max-width: 1400px; margin: 0 auto; }
+.section-title{
+  font-family:'Cormorant Garamond','Times New Roman',serif;
+  font-weight:600; text-transform:uppercase; letter-spacing:.03em;
+  color:#1D2A44; text-align:center; margin:0 0 22px;
+  font-size:clamp(2rem,2.6vw + 1rem,3rem);
+}
+
+.pictures-slider { position:relative; border-radius:2px; overflow:hidden; }
+.pictures-slider .keen-slider__slide{ height: min(56vw, 520px); }
+.pictures-slider img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+
+/* Arrows */
+.pictures-slider .nav{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:44px; height:44px; border-radius:50%;
+  border:none; background:rgba(0,0,0,.45); color:#fff; font-size:26px;
+  display:grid; place-items:center; cursor:pointer; z-index:2;
+}
+.pictures-slider .nav.prev{ left:12px; }
+.pictures-slider .nav.next{ right:12px; }
+.pictures-slider .nav:hover{ background:rgba(0,0,0,.65); }
+
+@media (max-width:700px){
+  .pictures-slider .keen-slider__slide{ height: 58vw; }
+  .pictures-slider .nav{ width:38px; height:38px; font-size:22px; }
+}
+.expect{
+  --navy: #142843;           
+  background: var(--navy);
+  padding: 80px 0 96px;
+  color: #fff;
+}
+
+.expect__container{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.expect__title{
+  font-family: 'Cormorant Garamond','Times New Roman',serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  text-align: center;
+  margin: 0 0 36px;
+  font-size: clamp(2rem, 2.6vw + 1rem, 3rem);
+  color: #fff;                    /* crisp white title */
+}
+
+.expect__grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px 64px;                 /* row x column gap */
+}
+
+.expect__heading{
+  font-family: 'Cormorant Garamond','Times New Roman',serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  margin: 0 0 14px;
+  font-size: clamp(1.1rem, 1vw + .9rem, 1.5rem);
+  color: #fff;
+}
+
+.expect__text{
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: #E9EEF6;                
+  max-width: 560px;            
+}
+
+@media (max-width: 1000px){
+  .expect__grid{ grid-template-columns: repeat(2, 1fr); gap: 48px; }
+}
+@media (max-width: 640px){
+  .expect__grid{ grid-template-columns: 1fr; gap: 36px; }
+}
+</style>
+<script type="module">
+  import KeenSlider from "https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/+esm";
+
+  const el = document.getElementById("conf-photos");
+  if (el) {
+    el._ks?.destroy?.();
+    const slider = new KeenSlider(el, {
+      loop: true,
+      renderMode: "performance",
+      slides: { perView: 1, spacing: 0 },
+    });
+
+    // arrows
+    el.querySelector(".prev")?.addEventListener("click", () => slider.prev());
+    el.querySelector(".next")?.addEventListener("click", () => slider.next());
+
+    // simple autoplay
+    let t; const start=()=> t=setInterval(()=> slider.next(), 4000);
+    const stop =()=> clearInterval(t);
+    el.addEventListener("mouseenter", stop);
+    el.addEventListener("mouseleave", start);
+    start();
+  }
+</script>

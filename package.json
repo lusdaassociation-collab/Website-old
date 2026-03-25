@@ -1,0 +1,25 @@
+{
+  "name": "astro-starter-minimal",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^13.1.3",
+    "@astrojs/tailwind": "^6.0.2",
+    "astro": "^5.14.4",
+    "embla-carousel": "^8.6.0",
+    "fast-xml-parser": "^5.3.0",
+    "keen-slider": "^6.8.6",
+    "pdfjs-dist": "^5.5.207",
+    "resend": "^6.0.1",
+    "tailwindcss": "^3.4.17"
+  },
+  "devDependencies": {
+    "wrangler": "^4.32.0"
+  }
+}

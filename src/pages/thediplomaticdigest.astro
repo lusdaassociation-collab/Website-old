@@ -1,0 +1,347 @@
+---
+import TopBlueHeader from "../components/TopBlueHeader.astro";
+import SiteFooter from "../components/Footer.astro";
+export const prerender = false; // Need this since we're fetching dynamic data
+
+// Fetch journals on the server
+let journals = [];
+try {
+  // If we are in dev or if the full URL is needed
+  const apiUrl = Astro.url.origin + '/api/journals';
+  const res = await fetch(apiUrl);
+  if (res.ok) {
+    const data = await res.json();
+    if (data.success && data.journals) {
+      journals = data.journals;
+    }
+  }
+} catch (e) {
+  console.error("Failed to fetch journals:", e);
+}
+---
+
+... // the hero and accordion sections remain the same
+
+    <section class="month-paper" aria-labelledby="mp-title">
+      <div class="mp-container">
+        <h2 id="mp-title" class="mp-title">THE LATEST JOURNALS</h2>
+        
+        {journals.length > 0 ? (
+          <div class="journal-grid">
+            {journals.map((journal) => (
+              <a href={`/digest/${journal.slug}`} class="journal-card">
+                <div class="jc-content">
+                  <h3 class="jc-title">{journal.title}</h3>
+                  <p class="jc-excerpt">{journal.excerpt}</p>
+                  <span class="jc-date">
+                    {new Date(journal.published_at).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </span>
+                </div>
+                <div class="jc-footer">
+                  <span>Read Issue</span>
+                  <span aria-hidden="true">&rarr;</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <div style="text-align: center; color: var(--navy); opacity: 0.8;">
+            <p>No journals have been published yet. Check back soon!</p>
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+</body>
+</html>
+
+<style>
+  body {
+    background-color: #F4F0EC;
+    color: #1D2A44;
+  }
+
+  /* ... other styles are fine ... */
+
+  .mp-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    /* REMOVED text-align: center; */
+    
+    /* ADDED these two lines to properly center the component */
+    display: block; /* Removed grid/place-items */
+  }
+
+  /* ... other styles are fine ... */
+  
+  .digest-hero{
+    position: relative;
+    height: clamp(360px, 48vw, 620px);
+    background: url("/Pictures/digest.jpg") center / cover no-repeat;
+    overflow: hidden;
+  }
+  .digest-hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: linear-gradient(90deg,
+      rgba(0,0,0,.45) 0%,
+      rgba(0,0,0,.20) 35%,
+      rgba(0,0,0,0) 60%);
+    pointer-events:none;
+  }
+  .digest-title{
+    position: absolute;
+    left: clamp(16px, 12vw, 240px);
+    bottom: clamp(24px, 10vw, 120px);
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: clamp(1.9rem, 5vw + .2rem, 4rem);
+    letter-spacing: .01em;
+    color: #fff;
+    text-shadow: 0 10px 24px rgba(0,0,0,.35), 0 3px 8px rgba(0,0,0,.35);
+  }
+  @media (max-width: 640px){
+    .digest-title{ left: 20px; bottom: 24px; }
+  }
+  .digest-ticker{
+    --bg: #1D2A44;
+    --gap: clamp(24px, 3vw, 40px);
+    --speed: 28s;
+    background: var(--bg);
+    overflow: hidden;
+    position: relative;
+  }
+  .digest-ticker::before{
+    content:"";
+    position:absolute; inset:0 auto 0 0;
+    width:2px; background:#fff; opacity:.85;
+  }
+  .ticker{
+    white-space: nowrap;
+  }
+  .ticker__inner{
+    display:flex;
+    width: max-content;
+    will-change: transform;
+  }
+  .digest-ticker.start .ticker__inner{
+    animation: marquee var(--speed) linear infinite;
+  }
+  .strip{
+    display:inline-flex;
+    align-items:center;
+    gap: var(--gap);
+    min-width: 100vw;
+    padding: 18px clamp(16px, 3vw, 32px);
+  }
+  .word{
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    color:#fff;
+    font-size: clamp(1.6rem, 6vw, 4.5rem);
+    line-height:1;
+  }
+  .sep{
+    width:2px; height:.9em;
+    background:rgba(255,255,255,.9);
+    display:inline-block; transform: translateY(.08em);
+  }
+  .digest-ticker:hover .ticker__inner{ animation-play-state: paused; }
+  @media (prefers-reduced-motion: reduce){
+    .digest-ticker.start .ticker__inner{ animation: none; }
+  }
+  @keyframes marquee{
+    to { transform: translateX(-50%); }
+  }
+  .digest-accordion{
+    --navy:#1D2A44;
+    --text:#ffffff;
+    --muted:#E3EAF4;
+    background:var(--navy);
+    color:var(--text);
+    padding: 40px 0 80px;
+  }
+  .da-container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+  .da-item{ border-bottom: 1px solid rgba(255,255,255,.35); }
+  .da-item:first-child{ border-top: 1px solid rgba(255,255,255,.35); }
+  .da-summary{
+    list-style:none;
+    display:grid;
+    grid-template-columns: 1fr auto;
+    align-items:center;
+    gap: 24px;
+    cursor:pointer;
+    padding: 22px 0;
+  }
+  .da-summary::-webkit-details-marker{ display:none; }
+  .da-summary::marker{ content:""; }
+  .da-heading{
+    margin:0;
+    font-family:'Cormorant Garamond','Times New Roman',serif;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.02em;
+    font-size: clamp(1.2rem, 1vw + 1rem, 1.6rem);
+  }
+  .da-icon{
+    position:relative;
+    width: 18px; height: 18px;
+    flex: 0 0 18px;
+  }
+  .da-icon::before,
+  .da-icon::after{
+    content:"";
+    position:absolute; inset:0;
+    margin:auto;
+    background:#fff;
+    border-radius:1px;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+  .da-icon::before{
+    width: 18px; height: 2px;
+  }
+  .da-icon::after{
+    width: 2px; height: 18px;
+  }
+  .da-item[open] .da-icon::after{ transform: scaleY(0); opacity:0; }
+  .da-panel{
+    padding: 0 0 24px;
+    max-width: 950px;
+  }
+  .da-panel p{
+    margin:0;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--muted);
+  }
+  .da-summary:focus-visible{
+    outline: 2px solid #fff;
+    outline-offset: 4px;
+  }
+  @media (min-width: 1200px){
+    .da-container{ padding-left: 64px; padding-right: 64px; }
+  }
+  .month-paper{
+    background:#F4F0EC;
+    padding: 64px 0 96px;
+  }
+  
+  .mp-title{
+    margin: 0 0 48px;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: .02em;
+    color: #1D2A44;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: clamp(1.6rem, 2.2vw + 1rem, 2.8rem);
+    text-align: center;
+  }
+
+  /* Journal Cards Grid */
+  .journal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 32px;
+    margin-top: 40px;
+  }
+
+  .journal-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(15, 53, 84, 0.08);
+    border: 1px solid rgba(15, 53, 84, 0.05);
+    text-decoration: none;
+    color: var(--navy);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
+  }
+
+  .journal-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(15, 53, 84, 0.12);
+  }
+
+  .jc-content {
+    padding: 32px 28px 24px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .jc-title {
+    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0 0 12px;
+    line-height: 1.2;
+    color: #1D2A44;
+  }
+
+  .jc-excerpt {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #495869;
+    margin: 0 0 20px;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .jc-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: #6c7e93;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+
+  .jc-footer {
+    padding: 16px 28px;
+    background: rgba(29, 42, 68, 0.03);
+    border-top: 1px solid rgba(15, 53, 84, 0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.85rem;
+    color: #1D2A44;
+  }
+
+  .journal-card:hover .jc-footer {
+    background: #1D2A44;
+    color: #fff;
+  }
+</style>
+
+<script>
+  const root = document.querySelector('.digest-ticker');
+  if (root) {
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => {
+      root.classList.add('start');
+    });
+  }
+</script>

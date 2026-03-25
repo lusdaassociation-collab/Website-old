@@ -1,0 +1,232 @@
+---
+import TopBlueHeader from "../components/TopBlueHeader.astro";
+import SiteFooter from "../components/Footer.astro";
+import KeenCarousel from "../components/KeenCarousel.astro";
+---
+
+<TopBlueHeader
+  logoSrc="/Pictures/Logo.png"
+  sticky={false}
+/>
+<title> LUSDA - Cultural Events </title>
+  <section class="cultural-hero" style="--hero-img: url('/Pictures/colosseum.jpg');">
+  <div class="cultural-hero__overlay" aria-hidden="true"></div>
+  <h1 class="cultural-hero__title">CULTURAL EVENTS</h1>
+</section>
+<meta charset="utf-8">
+<section class="culture-expect" aria-labelledby="ce-title">
+  <div class="ce-container">
+    <h2 id="ce-title" class="ce-title">WHAT TO EXPECT</h2>
+
+    <div class="ce-grid">
+      <article class="ce-item">
+        <h3 class="ce-heading">CULTURAL INSTITUTIONS</h3>
+        <p class="ce-text">
+          Experience vibrant National Academies, cultural institutions, and art exhibitions that
+          celebrate the traditions and heritage of Italy and other countries including the US,
+          Japan, Egypt, and Romania. These events offer a unique opportunity to engage with and
+          appreciate cultural interactions as a means of diplomacy.
+        </p>
+      </article>
+
+      <article class="ce-item">
+        <h3 class="ce-heading">GUEST SPEAKERS AND PANELS</h3>
+        <p class="ce-text">
+          Hear from cultural ambassadors, artists, historians, and high-profile diplomatic actors
+          who share their insights and experiences. Topics range from art and history to military
+          alliances with NATO, providing real-world perspectives on how diplomacy works across fields.
+        </p>
+      </article>
+
+      <article class="ce-item">
+        <h3 class="ce-heading">COLLABORATIONS</h3>
+        <p class="ce-text">
+          LUSDA collaborates with associations at LUISS and abroad (e.g., Les Jeunes IHEDN and the
+          French Federation of Debate and Eloquence) to host events such as an Italian–French debate
+          contest and visits to Roman landmarks. These activities encourage direct participation and
+          open international networking opportunities.
+        </p>
+      </article>
+    </div>
+
+    <h2 class="ce-subtitle">SOME SNAPSHOTS OF OUR EVENTS</h2>
+  </div>
+</section>
+<section class="snapshots">
+  <div class="snapshots__wrap">
+    <div id="culture-snaps" class="keen-slider snapshots__slider">
+      <div class="keen-slider__slide"><img src="/Pictures/culture1.JPG" alt="Cultural event 1" loading="lazy"></div>
+      <div class="keen-slider__slide"><img src="/Pictures/culture2.JPG" alt="Cultural event 2" loading="lazy"></div>
+      <div class="keen-slider__slide"><img src="/Pictures/culture3.jpeg" alt="Cultural event 3" loading="lazy"></div>
+      <div class="keen-slider__slide"><img src="/Pictures/culture4.jpeg" alt="Cultural event 4" loading="lazy"></div>
+      <div class="keen-slider__slide"><img src="/Pictures/culture5.jpeg" alt="Cultural event 5" loading="lazy"></div>
+      <button class="snapshots__nav prev" aria-label="Previous slide">&lsaquo;</button>
+      <button class="snapshots__nav next" aria-label="Next Slide">&rsaquo;</button>
+    </div>
+  </div>
+</section>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/keen-slider.min.css">
+<SiteFooter
+  joinHref="/member"
+  location="Rome, RM, Italy"
+  email="lusdaassociation@gmail.com"
+/>
+<style>
+  .cultural-hero{
+    position: relative;
+    width: 100%;
+    height: 580px;
+    background-image: var(--hero-img);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+  }
+  .snapshots { padding: 0; background: #0000; }
+.snapshots__wrap { max-width: 1400px; margin: 0 auto; }
+
+.snapshots__slider{
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.snapshots__slider{ display: flex; }
+.snapshots__slider .keen-slider__slide{
+  flex: 0 0 100%;
+}
+
+.snapshots__slider .keen-slider__slide{
+  aspect-ratio: 16 / 9;       
+}
+@supports not (aspect-ratio: 16/9){
+  .snapshots__slider .keen-slider__slide{ height: min(58vw, 560px); }
+}
+
+.snapshots__slider img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       
+  display: block;
+}
+
+.snapshots__nav{
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 46px; height: 46px; border-radius: 50%;
+  border: none; display: grid; place-items: center;
+  background: #fff; color: #1D2A44; font-size: 28px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+  cursor: pointer; z-index: 3; user-select: none;
+}
+.snapshots__nav.prev{ left: 14px; }
+.snapshots__nav.next{ right: 14px; }
+.snapshots__nav:hover{ transform: translateY(-50%) scale(1.06); }
+
+@media (max-width: 700px){
+  .snapshots__nav{ width: 40px; height: 40px; font-size: 24px; }
+}
+.culture-expect{
+  background:#000;        
+  color:#fff;
+  padding: 84px 0 64px;
+}
+
+.ce-container{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.ce-title,
+.ce-heading,
+.ce-subtitle{
+  font-family: 'Cormorant Garamond','Times New Roman',serif;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  font-weight: 600;
+  margin: 0;
+}
+
+.ce-title{
+  font-size: clamp(2rem, 2.6vw + 1rem, 3rem);
+  margin-bottom: 36px;
+}
+
+.ce-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px 72px;
+  align-items:start;
+  margin-bottom: 72px;
+}
+
+.ce-heading{
+  font-size: clamp(1.1rem, 1vw + .9rem, 1.45rem);
+  margin-bottom: 14px;
+}
+
+.ce-text{
+  max-width: 420px;
+  margin: 0 auto;
+  font-size: 1.02rem;
+  line-height: 1.85;
+  color: #E6E6E6;           
+}
+
+.ce-subtitle{
+  font-size: clamp(1.6rem, 2.3vw + 1rem, 2.6rem);
+}
+
+@media (max-width: 980px){
+  .ce-grid{ grid-template-columns: 1fr; gap: 36px; }
+}
+
+  .cultural-hero__overlay{
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(80% 80% at 50% 50%, rgba(0,0,0,.35) 0%, rgba(0,0,0,0) 60%),
+      linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.28));
+    pointer-events: none;
+  }
+
+  .cultural-hero__title{
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: .02em;
+    color: #fff;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+  }
+
+  @media (max-width: 640px){
+    .cultural-hero__title{ font-size: clamp(1.6rem, 8vw, 2.6rem); }
+  }
+</style>
+<script type="module">
+  import KeenSlider from "https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/+esm";
+
+  const el = document.getElementById("culture-snaps");
+  if (el) {
+    el._ks?.destroy?.();               
+    const slider = new KeenSlider(el, {
+      loop: true,
+      renderMode: "performance",
+      slides: { perView: 1, spacing: 0 },
+    });
+
+    el.querySelector(".prev")?.addEventListener("click", () => slider.prev());
+    el.querySelector(".next")?.addEventListener("click", () => slider.next());
+
+    let t;
+    const start = () => (t = setInterval(() => slider.next(), 4500));
+    const stop  = () => clearInterval(t);
+    el.addEventListener("mouseenter", stop);
+    el.addEventListener("mouseleave", start);
+    start();
+  }
+</script>

@@ -1,0 +1,363 @@
+---
+import PieChart from "../components/PieChart.astro";
+import TopBlueHeader from "../components/TopBlueHeader.astro";
+import SiteFooter from "../components/Footer.astro";
+import SideMenu from "../components/SideMenu.astro";
+
+const LOGO_SRC = "/Pictures/Logo.png";
+const byDegrees = [
+  { label: "PPE", value: 42 },
+  { label: "Law", value: 28 },
+  { label: "Economics", value: 18 },
+  { label: "IR/Politics", value: 12 },
+];
+const byCourses = [
+  { label: "Bachelor", value: 60 },
+  { label: "Master", value: 25 },
+  { label: "Exchange", value: 10 },
+  { label: "PhD", value: 5 },
+];
+---
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LUSDA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/Pictures/favicon.png">
+</head>
+
+<body class="min-h-screen bg-[#F4F0EC] text-gray-900">
+  <SideMenu />
+  <TopBlueHeader
+    logoSrc="/Pictures/Logo.png"
+    sticky={false}
+  />
+
+  <main>
+    <section class="hero-image reveal">
+      <img src="/Pictures/flag-hall.jpg" alt="LUSDA Flag Hall" />
+    </section>
+
+    <section class="mx-auto max-w-6xl px-4 py-12">
+      <div class="text-center reveal">
+        <img
+          src="/Pictures/LUSDA.PNG"
+          alt="LUSDA Logo"
+          class="mx-auto w-[459px] h-[258px] object-contain"
+          width="459" height="258"
+        />
+        <a
+          href="/member"
+          class="mt-8 mb-20 md:mb-28 inline-flex w-[224px] h-[68px] items-center justify-center
+                 rounded-[18px] uppercase tracking-[0.08em]
+                 text-[#0f3554] bg-[#f4f0ea]
+                 border border-[#0f3554] shadow-[inset_0_0_0_1px_rgba(15,53,84,0.25)]
+                 transition-colors duration-200
+                 hover:bg-[#0f3554] hover:text-white
+                 focus-visible:outline-none focus-visible:ring-2
+                 focus-visible:ring-[#0f3554] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4F0EC]"
+        >
+          Join Us
+        </a>
+      </div>
+
+      <section class="bg-[#F4F0EC] text-[#0f3554] reveal">
+        <div class="max-w-6xl mx-auto px-4 py-16">
+          <div>
+            <h2
+              class="text-left uppercase tracking-tight font-extrabold text-[clamp(1.9rem,3.8vw,3rem)] mt-8 md:mt-10 text-[#0f3554]"
+              style="font-family:'Montserrat',system-ui,sans-serif;"
+            >
+              OUR VISION, OUR MISSION
+            </h2>
+            <p
+              class="mr-auto mt-6 text-lg md:text-xl leading-8 text-[#0f3554]/90 text-left max-w-none"
+              style="font-family:'Inter',system-ui,sans-serif;"
+            >
+              LUSDA is dedicated to empowering students with the knowledge and skills necessary for a
+              successful career in international relations and diplomacy. We strive to bridge the gap
+              between academic learning and practical experience through various engaging activities.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mt-14">
+            <div>
+              <h3 class="text-[1.125rem] uppercase tracking-[.08em]" style="font-family:'Libre Baskerville',serif;">
+                +500 STUDENTS
+              </h3>
+              <p class="mt-3 leading-8 text-[#0f3554]/90" style="font-family:'Inter',system-ui,sans-serif;">
+                Since our foundation, we successfully engaged over
+                <span class="font-semibold">500 students</span> in enriching programs that enhance
+                their understanding of global diplomacy.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-[1.125rem] uppercase tracking-[.08em]" style="font-family:'Libre Baskerville',serif;">
+                +25 COUNTRIES
+              </h3>
+              <p class="mt-3 leading-8 text-[#0f3554]/90" style="font-family:'Inter',system-ui,sans-serif;">
+                Born from an international context, we actively seek a culturally varied and open
+                membership. At the moment, <span class="font-semibold">25 different nationalities</span>
+                make up our membership.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-[1.125rem] uppercase tracking-[.08em]" style="font-family:'Libre Baskerville',serif;">
+                +60 EVENTS
+              </h3>
+              <p class="mt-3 leading-8 text-[#0f3554]/90" style="font-family:'Inter',system-ui,sans-serif;">
+                LUSDA has organized over <span class="font-semibold">60 impactful events</span>, fostering
+                a deeper connection between students and the world of International Relations.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-[1.125rem] uppercase tracking-[.08em]" style="font-family:'Libre Baskerville',serif;">
+                +40 EMBASSIES
+              </h3>
+              <p class="mt-3 leading-8 text-[#0f3554]/90" style="font-family:'Inter',system-ui,sans-serif;">
+                We have facilitated visits to <span class="font-semibold">+40 embassies</span> and
+                international organizations, providing students with firsthand insights into the
+                workings of diplomacy.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-12 reveal">
+        <div class="flex flex-wrap justify-center gap-x-20 gap-y-20">
+          <div class="chart-card max-w-[420px]">
+            <PieChart
+              title="LUSDA BY DEGREES"
+              size={300}
+              stroke={60}
+              data={[
+                { label: "Master's",          value: 257, color: "#F0523B" },
+                { label: "Bachelor's",        value: 265, color: "#F7B413" },
+                { label: "PhD/ Single Cycle", value:  53, color: "#2480C4" },
+              ]}
+            />
+          </div>
+          <div class="chart-card max-w-[420px]">
+            <PieChart
+              title="LUSDA BY COURSES"
+              size={300}
+              stroke={60}
+              data={[
+                { label: "International Relations", value: 214, color: "#F0523B" },
+                { label: "Political Sciences",      value: 212, color: "#F7B413" },
+                { label: "Law",                     value:  53, color: "#2480C4" },
+                { label: "Economics",               value:  54, color: "#16A34A" },
+                { label: "Other/Exchange Students", value:  29, color: "#A855F7" },
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+
+      <div class="mt-16 flex justify-center reveal">
+        <a
+          href="/about" 
+          class="inline-flex items-center justify-center
+                 w-full max-w-[620px] h-[72px]
+                 rounded-[18px]
+                 uppercase tracking-[0.08em]
+                 text-[#0f3554] bg-[#f4f0ea]
+                 border border-[#0f3554]
+                 shadow-[inset_0_0_0_1px_rgba(15,53,84,0.25)]
+                 hover:bg-[#0f3554] hover:text-white hover:shadow-none
+                 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0f3554]/40
+                 transition text-[15px] md:text-base"
+        >
+          Curious to learn more? Read our story!
+        </a>
+      </div>
+    </section>
+
+    <section id="activities" class="mt-20 bg-[#1f3147] text-[#F4F0EC]">
+      <div class="mx-auto max-w-[1200px] px-4 py-14 reveal">
+        <h2
+          class="uppercase tracking-[0.08em] text-left
+                 text-[clamp(1.6rem,3vw,2.2rem)] font-semibold"
+          style="font-family:'Montserrat',system-ui,sans-serif;"
+        >
+          EXPLORE OUR ACTIVITIES
+        </h2>
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <article class="space-y-3">
+            <div class="overflow-hidden rounded-lg ring-1 ring-white/10">
+              <img src="/Pictures/meeting.JPG" alt="Meetings with Diplomats" class="w-full h-56 object-cover hover:opacity-95 transition" />
+            </div>
+            <h3 class="uppercase tracking-[.08em] text-sm font-semibold">MEETINGS WITH DIPLOMATS</h3>
+            <p class="text-sm leading-6 text-[#E9E5DF]">
+              Join us for an engaging series of in-depth discussions featuring diplomats and ambassadors from across the globe. Participate in roundtable dialogues that explore pressing international issues and evolving diplomatic strategies. Gain valuable insights from experts with firsthand experience in global affairs and international relations.
+            </p>
+            <div class="pt-1">
+              <a href="/meetingwithdiplomats" class="inline-flex items-center justify-center px-5 py-2 rounded-[12px] text-[#F4F0EC] border border-[#F4F0EC] uppercase tracking-[.08em] text-[12px] hover:bg-[#F4F0EC] hover:text-[#0f3554] transition">
+                Learn More
+              </a>
+            </div>
+          </article>
+          <article class="space-y-3">
+            <div class="overflow-hidden rounded-lg ring-1 ring-white/10">
+              <img src="/Pictures/studyvisit.png" alt="Study Visits" class="w-full h-56 object-cover hover:opacity-95 transition" />
+            </div>
+            <h3 class="uppercase tracking-[.08em] text-sm font-semibold">STUDY VISITS</h3>
+            <p class="text-sm leading-6 text-[#E9E5DF]">
+              Come along with us to observe and learn through a series of study visits in Italy and abroad, designed to provide our members with privileged insight into the operations of global institutions, governmental bodies, and significant cultural landmarks, fostering a deeper understanding of international affairs and diplomacy.
+            </p>
+            <div class="pt-1">
+              <a href="/studyvisits" class="inline-flex items-center justify-center px-5 py-2 rounded-[12px] text-[#F4F0EC] border border-[#F4F0EC] uppercase tracking-[.08em] text-[12px] hover:bg-[#F4F0EC] hover:text-[#0f3554] transition">
+                Learn More
+              </a>
+            </div>
+          </article>
+          <article class="space-y-3">
+            <div class="overflow-hidden rounded-lg ring-1 ring-white/10">
+              <img src="/Pictures/InternationalConference.jpeg" alt="Conferences" class="w-full h-56 object-cover hover:opacity-95 transition" />
+            </div>
+            <h3 class="uppercase tracking-[.08em] text-sm font-semibold">CONFERENCES</h3>
+            <p class="text-sm leading-6 text-[#E9E5DF]">
+              LUSDA offers the unique opportunity to attend and participate in conferences that bring together a diverse array of voices. from across the globe. Whether held in Italy or abroad, these conferences are designed to provide direct access to influential figures in the world of international relations.
+            </p>
+            <div class="pt-1">
+              <a href="/conferences" class="inline-flex items-center justify-center px-5 py-2 rounded-[12px] text-[#F4F0EC] border border-[#F4F0EC] uppercase tracking-[.08em] text-[12px] hover:bg-[#F4F0EC] hover:text-[#0f3554] transition">
+                Learn More
+              </a>
+            </div>
+          </article>
+          <article class="space-y-3">
+            <div class="overflow-hidden rounded-lg ring-1 ring-white/10">
+              <img src="/Pictures/workshop.png" alt="Thematic Workshops" class="w-full h-56 object-cover hover:opacity-95 transition" />
+            </div>
+            <h3 class="uppercase tracking-[.08em] text-sm font-semibold">THEMATIC WORKSHOPS</h3>
+            <p class="text-sm leading-6 text-[#E9E5DF]">
+              Our Thematic Workshops are designed to provide hands-on, immersive, and dynamic learning experiences that dive into specific areas of international relations and diplomacy. These workshops are tailored to address the most relevant and pressing issues on the global stage, offering the chance to enhance your skills and knowledge in a focused, interactive environment.
+            </p>
+            <div class="pt-1">
+              <a href="/thematicworkshops" class="inline-flex items-center justify-center px-5 py-2 rounded-[12px] text-[#F4F0EC] border border-[#F4F0EC] uppercase tracking-[.08em] text-[12px] hover:bg-[#F4F0EC] hover:text-[#0f3554] transition">
+                Learn More
+              </a>
+            </div>
+          </article>
+          <article class="space-y-3">
+            <div class="overflow-hidden rounded-lg ring-1 ring-white/10">
+              <img src="/Pictures/digest.jpg" alt="The Diplomatic Digest" class="w-full h-56 object-cover hover:opacity-95 transition" />
+            </div>
+            <h3 class="uppercase tracking-[.08em] text-sm font-semibold">THE DIPLOMATIC DIGEST</h3>
+            <p class="text-sm leading-6 text-[#E9E5DF]">
+              The Diplomatic Digest is the official LUSDA newspaper, serving as a platform for insightful analysis, expert commentary, and student perspectives on the most pressing issues in international relations and diplomacy. Our publication is dedicated to keeping you informed and engaged with the latest developments in global affairs.
+            </p>
+            <div class="pt-1">
+              <a href="/thediplomaticdigest" class="inline-flex items-center justify-center px-5 py-2 rounded-[12px] text-[#F4F0EC] border border-[#F4F0EC] uppercase tracking-[.08em] text-[12px] hover:bg-[#F4F0EC] hover:text-[#0f3554] transition">
+                Learn More
+              </a>
+            </div>
+          </article>
+          <article class="space-y-3">
+            <div class="overflow-hidden rounded-lg ring-1 ring-white/10">
+              <img src="/Pictures/culturalevent.jpg" alt="Cultural Events" class="w-full h-56 object-cover hover:opacity-95 transition" />
+            </div>
+            <h3 class="uppercase tracking-[.08em] text-sm font-semibold">CULTURAL EVENTS</h3>
+            <p class="text-sm leading-6 text-[#E9E5DF]">
+              At LUSDA, we believe that understanding and appreciating cultural diversity is essential for effective diplomacy and international relations. Our Cultural Events are designed to immerse you in the rich tapestry of global cultures, fostering cross-cultural understanding and enhancing your global perspective.
+            </p>
+            <div class="pt-1">
+              <a href="/culturalevents" class="inline-flex items-center justify-center px-5 py-2 rounded-[12px] text-[#F4F0EC] border border-[#F4F0EC] uppercase tracking-[.08em] text-[12px] hover:bg-[#F4F0EC] hover:text-[#0f3554] transition">
+                Learn More
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="reveal">
+    <SiteFooter
+      joinHref="/member"
+      location="Rome, RM, Italy"
+      email="lusdaassociation@gmail.com"
+      linkedin="https://www.linkedin.com/company/lusda"
+      instagram="https://www.instagram.com/lusda"
+    />
+  </div>
+
+  <svg width="0" height="0" xmlns="http://www.w3.org/2000/svg" style="position:absolute; overflow: visible;">
+    <clipPath id="two-arches-clip" clipPathUnits="objectBoundingBox">
+      <path d="M0,1 L0,0.65 C0,0.45 0.2,0.15 0.5,0.15 C0.8,0.15 1,0.45 1,0.65 L1,1 Z" />
+    </clipPath>
+  </svg>
+</body>
+</html>
+
+<style>
+  .hero-image {
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+  }
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .arched-frame {
+    width: 100%;
+    max-width: 1200px;
+    height: 300px;
+    overflow: hidden;
+    margin: 0 auto;
+    position: relative;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    will-change: opacity, transform;
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { transition: none; }
+  }
+  .hero-section {
+    padding: 2rem 0;
+  }
+</style>
+
+<script>
+  (() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduceMotion) {
+      document.querySelectorAll('.reveal').forEach(el => {
+        el.classList.add('is-visible');
+      });
+      return;
+    }
+
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+
+        const delay = parseFloat(el.dataset.delay || '0');
+        if (delay) el.style.transitionDelay = `${delay}s`;
+
+        el.classList.add('is-visible');
+        obs.unobserve(el);
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -5% 0px'
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  })();
+</script>

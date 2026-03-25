@@ -1,0 +1,210 @@
+---
+import TopBlueHeader from "../../components/TopBlueHeader.astro";
+import SiteFooter from "../../components/Footer.astro";
+---
+<TopBlueHeader
+  logoSrc="/Pictures/Logo.png"
+  sticky={false}
+/>
+
+<section class="bio-section">
+  <div class="bio-wrap">
+    <!-- Left: portrait in a rounded card -->
+    <figure class="bio-photo">
+      <!-- Replace the src with your image path -->
+      <img src="/Pictures/MATILDESARDO.jpg" alt="Portrait of Alexander Milano" />
+    </figure>
+
+    <!-- Right: copy -->
+    <div class="bio-content">
+      <h1 class="bio-name">MATILDE SARDO</h1>
+      <p class="bio-role">STRATEGY AND DEVELOPMENT OFFICER</p>
+
+      <div class="bio-text">
+        <p>Italo-Canadian student, enrolled in the first year of the Master of International Relations. </p>
+
+        <p>
+          Being extremely curious and having grown up in an English-speaking environment, I have always been prone to exploring unknown places, building international networks, deepening new cultures. This aptitude has later expanded to international affairs, global matters, and political issues, interests that have motivated my choice of field of study. 
+        </p>
+
+        <p>
+          Pushed by my curiosity and my desire for change, I spent my second year of Bachelor’s in Tours, France, where I further developed my skills related to adaptability, reliance, responsibility, and independence. Furthermore, this experience enabled me to expand the capability to engage and work in heterogeneous and international teams.
+        </p>
+        <p>
+          On a personal level I am determined, responsible, capable of effective time- and project-management. I tend to challenge myself by detaching from my comfort zone. Moreover, being a dynamic spirit, I love to practice sports — running, tennis, and volleyball. I also read a lot — about history, geopolitics, and novels. 
+        </p>
+      </div>
+
+      <div class="bio-contacts">
+        <h2 class="bio-contacts__title">Reach out:</h2>
+        <ul>
+          <li>
+            <a href="mailto:matilde.sardo@studenti.luiss.it">matilde.sardo@studenti.luiss.it</a>
+          </li>
+          <li>
+            <a href="www.linkedin.com/in/matilde-sardo" target="_blank" rel="noopener">LinkedIn</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <SiteFooter
+  joinHref="/join"
+  location="Rome, RM, Italy"
+  email="lusdaassociation@gmail.com"
+  linkedin="https://www.linkedin.com/your-page"
+  instagram="https://instagram.com/your-page"
+/>
+<style>
+  /* Theme */
+  .bio-section{
+    --bg:#22324a;         /* dark blue background */
+    --ink:#ffffff;        /* headings */
+    --body:#e7edf5;       /* paragraph/secondary */
+    --card:#eef0f3;       /* portrait card background */
+    --link:#cfe2ff;       /* link tint */
+    background:var(--bg);
+    padding: clamp(28px, 5vw, 56px) 1rem;
+  }
+  .bio-wrap{
+    max-width: 1200px;
+    margin: 0 auto;
+    display:grid;
+    grid-template-columns: minmax(260px, 540px) 1fr;
+    gap: clamp(24px, 4vw, 56px);
+    align-items: start;
+  }
+
+  /* Left column: portrait */
+  .bio-photo{
+    margin:0;
+    background: var(--card);
+    border-radius: 28px;
+    padding: clamp(10px, 1.6vw, 18px);
+    box-shadow: 0 14px 40px rgba(0,0,0,.18);
+  }
+  .bio-photo img{
+    display:block;
+    width:100%;
+    height:auto;
+    border-radius: 18px;
+    object-fit: contain; /* keep transparent/white background edge like in screenshot */
+    background: transparent;
+  }
+
+  /* Right column: content */
+  .bio-content{ color: var(--body); }
+  .bio-name{
+    margin: 0 0 .35rem 0;
+    color: var(--ink);
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-weight: 700;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    font-size: clamp(1.6rem, 3.6vw, 2.6rem);
+  }
+  .bio-role{
+    margin: 0 0 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--ink);
+    opacity: .85;
+  }
+  .bio-text p{
+    margin: 0 0 1rem;
+    line-height: 1.8;
+  }
+
+  /* Contacts */
+  .bio-contacts{ margin-top: 1.25rem; }
+  .bio-contacts__title{
+    margin: 0 0 .5rem;
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .bio-contacts ul{
+    margin: .25rem 0 0;
+    padding-left: 1.1rem;
+    list-style: disc;
+  }
+  .bio-contacts li{
+    margin: .4rem 0;
+  }
+  .bio-contacts a{
+    color: var(--link);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .bio-contacts a:hover{
+    opacity: .9;
+  }
+
+  /* Responsive stack */
+  @media (max-width: 960px){
+    .bio-wrap{ grid-template-columns: 1fr; }
+    .bio-photo{ max-width: 680px; margin-inline: auto; }
+  }
+  .bio-photo{
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* make both columns equal height (down to the LinkedIn line) */
+.bio-wrap{
+  align-items: stretch;              /* stretch items to the track height */
+}
+
+/* make the image fill the full column height */
+.bio-photo{ height: 100%; }
+.bio-photo img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;               /* keep proportions, no crop */
+  background: transparent;
+}
+
+/* when stacked on mobile, revert to natural height */
+@media (max-width: 960px){
+  .bio-wrap{ align-items: start; }
+  .bio-photo{ height: auto; }
+  .bio-photo img{ height: auto; }
+}
+.bio-wrap{ align-items: stretch; }
+
+/* Crop + zoom the portrait */
+.bio-photo{
+  position: relative;
+  overflow: hidden;          /* crop the zoomed image */
+  height: 100%;              /* fill the column height */
+  /* keep your existing border-radius if you want rounded corners */
+  /* border-radius: 28px; */
+}
+
+.bio-photo img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* fill and crop */
+  object-position: var(--focus-x,50%) var(--focus-y,50%);
+  transform: scale(var(--zoom,1));          /* the zoom */
+  transform-origin: var(--focus-x,50%) var(--focus-y,50%);
+  display: block;
+  background: transparent;
+}
+
+/* On mobile, don’t force height/zoom (avoid awkward crop) */
+@media (max-width: 960px){
+  .bio-wrap{ align-items: start; }
+  .bio-photo{ height: auto; }
+  .bio-photo img{
+    height: auto;
+    transform: none;
+    object-fit: contain;
+  }
+}
+</style>

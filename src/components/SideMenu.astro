@@ -1,0 +1,242 @@
+---
+const {
+  top = [
+    { label: "Home", href: "/" },
+    {
+      label: "About",
+      children: [
+        { label: "2024/2025 TEAM", href: "/2024-2025Team" },
+        { label: "Founders & Presidents", href: "/Founders&Presidents" },
+        { label: "About LUSDA", href: "/about" },
+      ],
+    },
+    {
+      label: "Activities",
+      children: [
+        { label: "Meeting With Diplomats", href: "/meetingwithdiplomats" },
+        { label: "Study Visits", href: "/studyvisits" },
+        { label: "Conferences", href: "/conferences" },
+        { label: "Thematic Workshops", href: "/thematicworkshops" },
+        { label: "Cultural Events", href: "/culturalevents" },
+        { label: "Social Events", href: "/socialevents" },
+        { label: "Diplomatic Digest", href: "/thediplomaticdigest" }, // Moved here
+      ],
+    },
+    {
+      label: "Summits",
+      children: [{ label: "YIAPD", href: "/YIAPD" }],
+    },
+    { label: "Events", href: "/events" },
+  ],
+  bottom = [
+    {
+      label: "Reach out",
+      href: "/contact",
+      children: [{ label: "Become a Member", href: "/member" }],
+    },
+  ],
+  logoSrc = "/Pictures/Logo.png",
+  logoAlt = "LUSDA",
+} = Astro.props;
+---
+
+<div class="side-menu-container">
+  <div class="menu-tab">
+    <span class="tab-text">MENU</span>
+  </div>
+
+  <nav class="side-menu">
+    <div class="menu-content">
+      <div class="nav-section">
+        <ul class="nav-list">
+          {top.map((item) => (
+            <li class="nav-item">
+              <a href={item.href} class="nav-link">
+                {item.label}
+                {item.children && <span class="caret">▾</span>}
+              </a>
+              {item.children && (
+                <ul class="submenu">
+                  {item.children.map((child) => (
+                    <li><a href={child.href}>{child.label}</a></li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+
+        <div class="divider-horizontal"></div>
+
+        <ul class="nav-list bottom-nav">
+          {bottom.map((item) => (
+            <li class="nav-item">
+              <a href={item.href} class="nav-link">
+                {item.label}
+                {item.children && <span class="caret">▾</span>}
+              </a>
+              {item.children && (
+                <ul class="submenu">
+                  {item.children.map((child) => (
+                    <li><a href={child.href}>{child.label}</a></li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="logo-section">
+        <a href="/">
+          <img src={logoSrc} alt={logoAlt} class="menu-logo" />
+        </a>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<style>
+  :root {
+    --menu-bg: #1F3454;
+    --menu-width: 420px;
+    --tab-width: 40px;
+    /* Transition Variables */
+    --sub-open-speed: 0.5s;  /* Slower opening */
+    --sub-close-speed: 0.1s; /* Faster closing */
+  }
+
+  .menu-tab {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: var(--tab-width);
+    height: 120px;
+    background: var(--menu-bg);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    z-index: 999;
+    transition: opacity 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-left: none;
+  }
+
+  .tab-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-size: 0.8rem;
+    transform: rotate(180deg);
+  }
+
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: calc(-1 * var(--menu-width));
+    width: var(--menu-width);
+    height: 100vh;
+    background: var(--menu-bg);
+    color: #fff;
+    z-index: 1000;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 5px 0 25px rgba(0,0,0,0.4);
+  }
+
+  .side-menu-container:hover .side-menu {
+    transform: translateX(var(--menu-width));
+  }
+  
+  .side-menu-container:hover .menu-tab {
+    opacity: 0;
+  }
+
+  .menu-content {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    padding: 2.5rem;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .nav-section {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 1rem;
+  }
+
+  .logo-section {
+    flex: 0 0 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .menu-logo {
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+    border-radius: 50%;
+  }
+
+  .nav-list { list-style: none; padding: 0; margin: 0; }
+  .nav-item { margin-bottom: 0.25rem; }
+  
+  .nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.05rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem;
+    border-radius: 6px;
+    transition: background 0.2s;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .nav-link:hover { background: rgba(255, 255, 255, 0.1); }
+  
+  .divider-horizontal { 
+    height: 1px; 
+    background: rgba(255, 255, 255, 0.15); 
+    margin: 1.2rem 0; 
+  }
+
+  /* Submenu Transition Logic */
+  .submenu {
+    list-style: none;
+    padding: 0 0 0 1.2rem;
+    max-height: 0;
+    overflow: hidden;
+    /* Default to fast close speed */
+    transition: max-height var(--sub-close-speed) ease-in;
+  }
+
+  /* Slower open speed when parent is hovered */
+  .nav-item:hover .submenu { 
+    max-height: 500px;
+    transition: max-height var(--sub-open-speed) ease-out;
+  }
+
+  .submenu li a {
+    color: rgba(244, 240, 236, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: block;
+    padding: 0.45rem 0;
+  }
+
+  .caret { font-size: 0.7rem; opacity: 0.5; }
+
+  @media (max-width: 600px) {
+    --menu-width: 90vw;
+    .menu-content { flex-direction: column-reverse; padding: 1.5rem; }
+    .nav-section { padding-right: 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; width: 100%; }
+  }
+</style>

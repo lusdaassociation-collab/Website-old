@@ -1,0 +1,118 @@
+---
+import TopBlueHeader from "../../components/TopBlueHeader.astro";
+import SiteFooter from "../../components/Footer.astro";
+const {
+  backHref = "/events",
+  backLabel = "Back to All Events",
+  title = "Gli Stati generali dell’informazione visti da Roma - Tutelare e sviluppare il diritto all’informazione: Un’emergenza per la democrazia",
+  date = "Thursday, March 6, 2025",
+  time = "5:00 PM – 7:00 PM",
+  body = [
+    "On Thursday the 6th of March a delegation of LUSDA members had the pleasure to be invited once more to the French Embassy at Palazzo Farnese to follow the highly interesting conference “Gli Stati generali dell’informazione visti da Roma - edizione 2. Tutelare e sviluppare il diritto all’informazione: Un’emergenza per la democrazia”.",
+    "The talk was opened by the French Ambassador H.E Martin Briens, Bruno Patino (President of Arte) and Alberto Barachini (Italian Undersecretary of State for information and publication). In the panel, several highly distinguished speakers were present: Gina Nieri (Institutional Affairs Director, Mediaset) ⁠Francesco Giorgino (LUISS Professor, Director of Ufficio Studi Rai) ⁠Enrico Mentana (director of TG La7) ⁠Stefano De Alessandri (CEO of Ansa).",
+    "During the talk, many aspects highlighting the importance of qualitative information through well regulated information channels were discussed. In a time of decentralized information-making through social-media pages, new risks such as the use of AI and the gatekeeping position of new actors arise. While the development of new technology has to be regarded as a neutral fact, the opportunities but also challenges need to be critically observed to protect the transparency and freedom to access qualitative information in modern-time democracies.",
+    "After the conference, the ambassador kindly offered refreshments in the unique surroundings of Palazzo Farnese, allowing us to exchange with the speakers and the personnel of the Embassy."
+  ]
+} = Astro.props;
+export const prerender = true;
+---
+
+<TopBlueHeader
+  logoSrc="/Pictures/Logo.png"
+  sticky={false}
+/>
+    <body class="page">
+    <main class="wrap" aria-labelledby="event-title">
+      <a class="back" href={backHref}>← {backLabel}</a>
+
+      <h1 id="event-title" class="title">{title}</h1>
+
+      <div class="meta">
+        <p class="date">{date}</p>
+        <p class="time">{time}</p>
+      </div>
+
+      <section class="body">
+        {body.map((p) => <p class="para">{p}</p>)}
+      </section>
+    </main>
+  </body>
+</html>
+
+<style>
+  :root {
+    --bg: #0f2a40;
+    --fg: #1F3454;
+    --fg-dim: #1F3454;
+    --fg-strong: #1F3454;
+    --accent: #1F3454;
+    --maxw: 1200px;
+    --pad-x: clamp(16px, 4vw, 48px);
+    --pad-y: clamp(20px, 4vw, 40px);
+  }
+
+  .page {
+    margin: 0;
+    min-height: 100vh;
+    background: #1F3454;
+    color: #1F3454;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue",
+      Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  }
+
+  .wrap {
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding: var(--pad-y) var(--pad-x);
+  }
+
+  .back {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: var(--fg-dim);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .back:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .title {
+    margin: 0 0 1rem;
+    color: var(--fg-strong);
+    font-size: clamp(28px, 3.6vw, 44px);
+    font-weight: 800;
+    line-height: 1.15;
+  }
+
+  .meta {
+    margin-bottom: 2rem;
+  }
+  .date,
+  .time {
+    margin: 0;
+    color: var(--fg-dim);
+    font-size: clamp(14px, 1.6vw, 18px);
+    font-weight: 600;
+  }
+
+  .body {
+
+  }
+
+  .para {
+    margin: 0 0 1.5rem;
+    line-height: 1.8;
+    font-size: clamp(16px, 1.7vw, 18px);
+    color: var(--fg);
+  }
+</style>
+<SiteFooter
+  joinHref="/member"
+  location="Rome, RM, Italy"
+  email="lusdaassociation@gmail.com"
+  linkedin="https://www.linkedin.com/your-page"
+  instagram="https://instagram.com/your-page"
+/>
+</html>

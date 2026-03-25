@@ -1,0 +1,204 @@
+---
+import TopBlueHeader from "../../components/TopBlueHeader.astro";
+import SiteFooter from "../../components/Footer.astro";
+---
+<TopBlueHeader
+  logoSrc="/Pictures/Logo.png"
+  sticky={false}
+/>
+
+<section class="bio-section">
+  <div class="bio-wrap">
+    <!-- Left: portrait in a rounded card -->
+    <figure class="bio-photo">
+      <!-- Replace the src with your image path -->
+      <img src="/Pictures/ANGELADISANTO.png" alt="Portrait of Alexander Milano" />
+    </figure>
+
+    <!-- Right: copy -->
+    <div class="bio-content">
+      <h1 class="bio-name">ANGELA DI SANTO</h1>
+      <p class="bio-role">Meeting with Diplomats Officer</p>
+
+      <div class="bio-text">
+        <p>Italian student, speaker of four languages, passionate about diplomacy, international relations, and international security.</p>
+
+        <p>
+          I am a naturally curious person, always eager to explore new cultures and traditions. This curiosity has fueled my love for travel and conversations with people from diverse backgrounds, which led me to spend an exchange year in Quebec. This experience, combined with my participation in Model United Nations simulations, played a significant role in shaping my future aspirations. Currently, I am pursuing a degree in Politics: Philosophy, and Economics (PPE), where I am honing the essential skills and knowledge necessary for my career in international relations.
+        </p>
+
+        <p>
+          On a personal level, I am a determined, strong, and highly organized individual. I have a deep love for music, cinema, and theater, having studied it since the age of 8. Additionally, I enjoy traveling, painting, and spending time outdoors. These activities allow me to recharge and stay connected with the world around me.
+        </p>
+      </div>
+
+      <div class="bio-contacts">
+        <h2 class="bio-contacts__title">Reach out:</h2>
+        <ul>
+          <li>
+            <a href="mailto:angela.disanto@studenti.luiss.it">angela.disanto@studenti.luiss.it</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <SiteFooter
+  joinHref="/join"
+  location="Rome, RM, Italy"
+  email="lusdaassociation@gmail.com"
+  linkedin="https://www.linkedin.com/your-page"
+  instagram="https://instagram.com/your-page"
+/>
+<style>
+  /* Theme */
+  .bio-section{
+    --bg:#22324a;         /* dark blue background */
+    --ink:#ffffff;        /* headings */
+    --body:#e7edf5;       /* paragraph/secondary */
+    --card:#eef0f3;       /* portrait card background */
+    --link:#cfe2ff;       /* link tint */
+    background:var(--bg);
+    padding: clamp(28px, 5vw, 56px) 1rem;
+  }
+  .bio-wrap{
+    max-width: 1200px;
+    margin: 0 auto;
+    display:grid;
+    grid-template-columns: minmax(260px, 540px) 1fr;
+    gap: clamp(24px, 4vw, 56px);
+    align-items: start;
+  }
+
+  /* Left column: portrait */
+  .bio-photo{
+    margin:0;
+    background: var(--card);
+    border-radius: 28px;
+    padding: clamp(10px, 1.6vw, 18px);
+    box-shadow: 0 14px 40px rgba(0,0,0,.18);
+  }
+  .bio-photo img{
+    display:block;
+    width:100%;
+    height:auto;
+    border-radius: 18px;
+    object-fit: contain; /* keep transparent/white background edge like in screenshot */
+    background: transparent;
+  }
+
+  /* Right column: content */
+  .bio-content{ color: var(--body); }
+  .bio-name{
+    margin: 0 0 .35rem 0;
+    color: var(--ink);
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-weight: 700;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    font-size: clamp(1.6rem, 3.6vw, 2.6rem);
+  }
+  .bio-role{
+    margin: 0 0 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--ink);
+    opacity: .85;
+  }
+  .bio-text p{
+    margin: 0 0 1rem;
+    line-height: 1.8;
+  }
+
+  /* Contacts */
+  .bio-contacts{ margin-top: 1.25rem; }
+  .bio-contacts__title{
+    margin: 0 0 .5rem;
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .bio-contacts ul{
+    margin: .25rem 0 0;
+    padding-left: 1.1rem;
+    list-style: disc;
+  }
+  .bio-contacts li{
+    margin: .4rem 0;
+  }
+  .bio-contacts a{
+    color: var(--link);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .bio-contacts a:hover{
+    opacity: .9;
+  }
+
+  /* Responsive stack */
+  @media (max-width: 960px){
+    .bio-wrap{ grid-template-columns: 1fr; }
+    .bio-photo{ max-width: 680px; margin-inline: auto; }
+  }
+  .bio-photo{
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* make both columns equal height (down to the LinkedIn line) */
+.bio-wrap{
+  align-items: stretch;              /* stretch items to the track height */
+}
+
+/* make the image fill the full column height */
+.bio-photo{ height: 100%; }
+.bio-photo img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;               /* keep proportions, no crop */
+  background: transparent;
+}
+
+/* when stacked on mobile, revert to natural height */
+@media (max-width: 960px){
+  .bio-wrap{ align-items: start; }
+  .bio-photo{ height: auto; }
+  .bio-photo img{ height: auto; }
+}
+.bio-wrap{ align-items: stretch; }
+
+/* Crop + zoom the portrait */
+.bio-photo{
+  position: relative;
+  overflow: hidden;          /* crop the zoomed image */
+  height: 100%;              /* fill the column height */
+  /* keep your existing border-radius if you want rounded corners */
+  /* border-radius: 28px; */
+}
+
+.bio-photo img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* fill and crop */
+  object-position: var(--focus-x,50%) var(--focus-y,50%);
+  transform: scale(var(--zoom,1));          /* the zoom */
+  transform-origin: var(--focus-x,50%) var(--focus-y,50%);
+  display: block;
+  background: transparent;
+}
+
+/* On mobile, don’t force height/zoom (avoid awkward crop) */
+@media (max-width: 960px){
+  .bio-wrap{ align-items: start; }
+  .bio-photo{ height: auto; }
+  .bio-photo img{
+    height: auto;
+    transform: none;
+    object-fit: contain;
+  }
+}
+</style>
